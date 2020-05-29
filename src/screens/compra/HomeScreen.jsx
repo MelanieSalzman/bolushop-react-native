@@ -12,6 +12,12 @@ const HomeScreen = (props) => {
           props.navigation.navigate("ProductDetails");
         }}
       />
+      <Button
+        title="Ver todos los boluproductos"
+        onPress={() => {
+          props.navigation.navigate("ProductList");
+        }}
+      />
     </View>
   );
 };

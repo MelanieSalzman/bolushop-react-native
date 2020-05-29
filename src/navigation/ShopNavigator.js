@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
 import ProductDetails from "../screens/compra/ProductDetails";
+import ProductList from "../screens/compra/ProductList";
 import { Platform, View, SafeAreaView, Text } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -28,6 +29,10 @@ export const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="ProductDetails"
         component={ProductDetails}
+      />
+      <HomeStackNavigator.Screen
+        name="ProductList"
+        component={ProductList}
       />
     </HomeStackNavigator.Navigator>
   );
