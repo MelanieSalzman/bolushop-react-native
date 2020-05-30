@@ -85,7 +85,7 @@ const ProductList = (props) => {
   return (
     <SafeAreaView style={styles.container}>
 
-        <Text style={styles.title}>Candidatos al Bolupremio del año</Text>
+        <Text style={styles.title}>Todos los productos de bolushop</Text>
 
         <FlatList
             data={products}
