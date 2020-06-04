@@ -9,6 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
 import ProductDetails from "../screens/compra/ProductDetails";
 import ProductList from "../screens/compra/ProductList";
+import MyProducts from '../screens/venta/MyProducts';
 import { Platform, View, SafeAreaView, Text } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -33,6 +34,10 @@ export const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="ProductList"
         component={ProductList}
+      />
+      <HomeStackNavigator.Screen
+        name="MyProducts"
+        component={MyProducts}
       />
     </HomeStackNavigator.Navigator>
   );
@@ -85,6 +90,20 @@ export const HomeDrawer = () => {
       />
       <HomeDrawerNavigator.Screen
         name="Mi cuenta"
+        component={HomeNavigator}
+        options={{
+          drawerIcon: (props) => {
+            <Ionicons
+              name={Platform.OS === "android" ? "md-create" : "ios-create"}
+              size={23}
+              color={props.color}
+            />;
+          },
+        }}
+      />
+
+      <HomeDrawerNavigator.Screen
+        name="Vender"
         component={HomeNavigator}
         options={{
           drawerIcon: (props) => {
