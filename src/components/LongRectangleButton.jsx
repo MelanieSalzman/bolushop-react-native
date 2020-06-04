@@ -20,10 +20,10 @@ const LongRectangleButton = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.1,
+        flex: 0.07,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "green",
+        backgroundColor: '#4EEE98',
         width: "100%"
     },
 });
