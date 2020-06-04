@@ -9,6 +9,7 @@ const SimpleButton = (props) => {
 
         <View style={styles.container}>
             <Button
+                color="#13BE6D"
                 title={props.title}
                 onPress={() => {
                     props.navigation.navigate(screen);
@@ -21,10 +22,9 @@ const SimpleButton = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.1,
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "green",
         width: "100%"
     },
 });

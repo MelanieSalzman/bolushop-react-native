@@ -18,11 +18,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "green",
+        width: "100%"
 
     },
     image: {
-        width: 120, 
-        height: 120
+        width: "100%", 
+        height: "100%"
     },
 });
 
