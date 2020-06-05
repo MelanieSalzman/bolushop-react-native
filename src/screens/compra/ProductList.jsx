@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { SafeAreaView, TouchableOpacity, FlatList, StyleSheet, Text} from 'react-native';
 import Constants from 'expo-constants';
+import ProductItem from '../../components/ProductItem.jsx'
+import TextH1 from '../../components/TextH1.jsx'
 
 
 const ProductList = (props) => {
@@ -46,61 +48,27 @@ const ProductList = (props) => {
         }
     ]
 
-    //Representa el producto seleccionado
-    const [selected, setSelected] = React.useState(new Map());
-
     //Representa el array de productos
     const [products, setProducts] = useState(arrayProducts);
-    
-    //Funcion que maneja el evento onSelect
-    const onSelect = React.useCallback(
-    id => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-
-      setSelected(newSelected);
-    },
-    [selected],
-  );
-
-  //Funcion que representa el item de producto
-    function Item({ id, name, description, cost, selected, onSelect }) {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-          props.navigation.navigate("ProductDetails");
-        }}
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
-      ]}
-    >
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <Text style={styles.cost}>{cost}</Text>
-    </TouchableOpacity>
-  );
-}
+ 
 
   return (
     <SafeAreaView style={styles.container}>
 
-        <Text style={styles.title}>Todos los productos de bolushop</Text>
+        <TextH1 text="Todos los productos de bolushop" />
 
-        <FlatList
+        <FlatList style={styles.title}
             data={products}
             renderItem={({ item }) => (
-            <Item
+            <ProductItem
                 id={item.id}
                 name={item.name}
                 description={item.description}
                 cost={item.cost}
-                selected={!!selected.get(item.id)}
-                onSelect={onSelect}
+                navigation={props.navigation}
             />
             )}
             keyExtractor={item => item.id}
-            extraData={selected}
         />
         
     </SafeAreaView>
@@ -114,25 +82,9 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: Constants.statusBarHeight,
     },
-    item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    name: {
-      fontSize: 20,
-    },
-    description: {
-      fontSize: 15,
-    },
-    cost: {
-      fontSize: 20,
-    },
     title: {
-        fontSize: 25,
-        padding: 20,
-      }
+      marginTop: 20
+    }
     
   });
 
