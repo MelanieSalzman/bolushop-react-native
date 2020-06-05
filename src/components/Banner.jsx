@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
+import React from'react';
+import { View, StyleSheet } from 'react-native';
 import TextH2 from "../components/TextH2.jsx"
 import SimpleButton from '../components/SimpleButton.jsx'
 import BannerImage from '../components/BannerImage.jsx'

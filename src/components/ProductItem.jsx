@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, SafeAreaView } from "react-native";
-import TextH2 from "../components/TextH2.jsx"
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import TextH2 from '../components/TextH2.jsx'
 import ProductImage from '../components/ProductImage.jsx'
 import CostBg from '../components/CostBg.jsx'
 

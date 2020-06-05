@@ -1,6 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
-import TextH2 from '../components/TextH2.jsx'
+import React from 'react';
+import { View, StyleSheet, Image} from 'react-native';
 
 const ProfilePicture = (props) => {
     return (

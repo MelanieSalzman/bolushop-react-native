@@ -1,18 +1,15 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import {
-  createDrawerNavigator,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
-import ProductDetails from "../screens/compra/ProductDetails";
-import ProductList from "../screens/compra/ProductList";
+import HomeScreen, { HomeNavOptions } from '../screens/compra/HomeScreen';
+import ProductDetails from '../screens/compra/ProductDetails';
+import ProductList from '../screens/compra/ProductList';
 import MyProducts from '../screens/venta/MyProducts';
 import MyAccount from '../screens/user/MyAccount';
-import { Platform, View, SafeAreaView, Text } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Platform, View, SafeAreaView, Text } from 'react-native';
+//import { Colors } from "react-native/Libraries/NewAppScreen";
 
 // import {
 //   PaginaInicio,

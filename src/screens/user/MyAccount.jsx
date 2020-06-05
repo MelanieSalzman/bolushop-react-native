@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'

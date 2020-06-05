@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity} from 'react-native';
 import TextH2 from '../components/TextH2.jsx'
 
 const LongRectangleButton = (props) => {

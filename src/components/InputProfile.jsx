@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React from 'react';
+import { View, StyleSheet, TextInput } from 'react-native';
 import Icon from '../components/Icon.jsx'
 import TextH2 from '../components/TextH2.jsx'
 

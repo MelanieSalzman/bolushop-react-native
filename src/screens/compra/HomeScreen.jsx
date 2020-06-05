@@ -1,6 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { View, StyleSheet} from 'react-native';
 import Title from '../../components/TextH1.jsx'
 import ProductItem from '../../components/ProductItem.jsx'
 import RectangleButton from '../../components/LongRectangleButton.jsx'
@@ -14,7 +13,7 @@ const HomeScreen = (props) => {
   return (
     <View style={styles.container}>
 
-      <Title text='Candidatos a BoluPremio del año' />
+      <Title style={{flex: 1,alignItems: "flex-start"}} text='Candidatos a BoluPremio del año' />
 
       <ProductItem
         name='Nombre del Producto'

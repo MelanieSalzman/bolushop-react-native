@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SafeAreaView, TouchableOpacity, FlatList, StyleSheet, Text} from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx'
 import TextH1 from '../../components/TextH1.jsx'
@@ -68,7 +68,7 @@ const ProductList = (props) => {
                 navigation={props.navigation}
             />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
         />
         
     </SafeAreaView>

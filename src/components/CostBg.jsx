@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import TextH1 from "./TextH1.jsx";
 
 const CostBg = (props) => {
