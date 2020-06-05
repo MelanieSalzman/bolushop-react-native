@@ -10,6 +10,7 @@ import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
 import ProductDetails from "../screens/compra/ProductDetails";
 import ProductList from "../screens/compra/ProductList";
 import MyProducts from '../screens/venta/MyProducts';
+import MyAccount from '../screens/user/MyAccount';
 import { Platform, View, SafeAreaView, Text } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -38,6 +39,18 @@ export const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="MyProducts"
         component={MyProducts}
+      />
+    </HomeStackNavigator.Navigator>
+  );
+};
+
+const AccountStackNavigator = createStackNavigator();
+export const MyAccountNavigator = () => {
+  return (
+    <HomeStackNavigator.Navigator>
+      <HomeStackNavigator.Screen
+        name="MyAccount"
+        component={MyAccount}
       />
     </HomeStackNavigator.Navigator>
   );
@@ -90,7 +103,7 @@ export const HomeDrawer = () => {
       />
       <HomeDrawerNavigator.Screen
         name="Mi cuenta"
-        component={HomeNavigator}
+        component={MyAccountNavigator}
         options={{
           drawerIcon: (props) => {
             <Ionicons
