@@ -1,22 +1,43 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { View, StyleSheet} from 'react-native';
+import Title from '../../components/TextH1.jsx'
+import ProductItem from '../../components/ProductItem.jsx'
+import RectangleButton from '../../components/LongRectangleButton.jsx'
+import Banner from '../../components/Banner.jsx'
+
 
 const HomeScreen = (props) => {
+
+    let bannerDescription = 'Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!'
+
   return (
     <View style={styles.container}>
-      <Text>Pagina Inicio</Text>
-      <Button
-        title="Ver producto"
-        onPress={() => {
-          props.navigation.navigate("ProductDetails");
-        }}
+
+      <Title style={{flex: 1,alignItems: "flex-start"}} text='Candidatos a BoluPremio del año' />
+
+      <ProductItem
+        name='Nombre del Producto'
+        description='Descripcion del producto'
+        cost='100'
+        navigation={props.navigation} />
+
+      <ProductItem
+        name='Nombre del Producto'
+        description='Descripcion del producto'
+        cost='100'
+        navigation={props.navigation}
+         />
+
+      <RectangleButton
+        text='Ver todos los boluproductos'
+        screen='ProductList'
+        navigation={props.navigation}
       />
-      <Button
-        title="Ver todos los boluproductos"
-        onPress={() => {
-          props.navigation.navigate("ProductList");
-        }}
+
+      <Banner title='Para vos comerciante'
+      description={bannerDescription}
+      navigation={props.navigation}
+      screen="MyProducts"
       />
     </View>
   );
@@ -31,7 +52,7 @@ export const HomeNavOptions = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
   },
 });

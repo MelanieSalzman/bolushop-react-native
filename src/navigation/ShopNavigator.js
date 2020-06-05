@@ -1,16 +1,15 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import {
-  createDrawerNavigator,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
-import ProductDetails from "../screens/compra/ProductDetails";
-import ProductList from "../screens/compra/ProductList";
-import { Platform, View, SafeAreaView, Text } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import HomeScreen, { HomeNavOptions } from '../screens/compra/HomeScreen';
+import ProductDetails from '../screens/compra/ProductDetails';
+import ProductList from '../screens/compra/ProductList';
+import MyProducts from '../screens/venta/MyProducts';
+import MyAccount from '../screens/user/MyAccount';
+import { Platform, View, SafeAreaView, Text } from 'react-native';
+//import { Colors } from "react-native/Libraries/NewAppScreen";
 
 // import {
 //   PaginaInicio,
@@ -33,6 +32,22 @@ export const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="ProductList"
         component={ProductList}
+      />
+      <HomeStackNavigator.Screen
+        name="MyProducts"
+        component={MyProducts}
+      />
+    </HomeStackNavigator.Navigator>
+  );
+};
+
+const AccountStackNavigator = createStackNavigator();
+export const MyAccountNavigator = () => {
+  return (
+    <HomeStackNavigator.Navigator>
+      <HomeStackNavigator.Screen
+        name="MyAccount"
+        component={MyAccount}
       />
     </HomeStackNavigator.Navigator>
   );
@@ -85,6 +100,20 @@ export const HomeDrawer = () => {
       />
       <HomeDrawerNavigator.Screen
         name="Mi cuenta"
+        component={MyAccountNavigator}
+        options={{
+          drawerIcon: (props) => {
+            <Ionicons
+              name={Platform.OS === "android" ? "md-create" : "ios-create"}
+              size={23}
+              color={props.color}
+            />;
+          },
+        }}
+      />
+
+      <HomeDrawerNavigator.Screen
+        name="Vender"
         component={HomeNavigator}
         options={{
           drawerIcon: (props) => {
