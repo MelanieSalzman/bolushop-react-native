@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     leftBox: {
-        flex:0.5,
+        flex:0.55,
         justifyContent: "center",
         alignItems: "center",
         width: '100%'

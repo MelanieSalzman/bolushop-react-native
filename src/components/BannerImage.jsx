@@ -6,7 +6,7 @@ const BannerImage = (props) => {
     return (
 
         <View style={styles.container}>
-            <Image source={require('../images/ImageRandom.png')} style={styles.image}/>
+            <Image source={require('../images/Sell.png')} style={styles.image}/>
             
         </View>
 
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "green",
-        width: "100%"
+        width: "100%",
+        padding: 10
 
     },
     image: {
         width: "100%", 
-        height: "100%"
+        height: "100%",
     },
 });
 

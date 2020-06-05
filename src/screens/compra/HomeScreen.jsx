@@ -8,6 +8,9 @@ import Banner from '../../components/Banner.jsx'
 
 
 const HomeScreen = (props) => {
+
+    let bannerDescription = 'Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!'
+
   return (
     <View style={styles.container}>
 
@@ -16,13 +19,13 @@ const HomeScreen = (props) => {
       <ProductItem
         name='Nombre del Producto'
         description='Descripcion del producto'
-        cost='$100'
+        cost='100'
         navigation={props.navigation} />
 
       <ProductItem
         name='Nombre del Producto'
         description='Descripcion del producto'
-        cost='$100'
+        cost='100'
         navigation={props.navigation}
          />
 
@@ -33,7 +36,7 @@ const HomeScreen = (props) => {
       />
 
       <Banner title='Para vos comerciante'
-      description='Hace crecer tus ventas'
+      description={bannerDescription}
       navigation={props.navigation}
       screen="MyProducts"
       />
