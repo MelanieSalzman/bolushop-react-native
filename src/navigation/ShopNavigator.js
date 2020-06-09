@@ -8,7 +8,8 @@ import ProductDetails from '../screens/compra/ProductDetails';
 import ProductList from '../screens/compra/ProductList';
 import MyProducts from '../screens/venta/MyProducts';
 import MyAccount from '../screens/user/MyAccount';
-import { Platform, View, SafeAreaView, Text } from 'react-native';
+import { Platform, View, SafeAreaView, Text, Image, Dimensions } from 'react-native';
+
 //import { Colors } from "react-native/Libraries/NewAppScreen";
 
 // import {
@@ -16,6 +17,8 @@ import { Platform, View, SafeAreaView, Text } from 'react-native';
 //   opcionesDeLaPantalla,
 // } from "../screens/main/PaginaInicio";
 
+
+const {width }= Dimensions.get('window')
 const HomeStackNavigator = createStackNavigator();
 export const HomeNavigator = () => {
   return (
@@ -60,11 +63,10 @@ export const HomeDrawer = () => {
       drawerContent={(props) => {
         return (
           <View style={{ flex: 1, paddingTop: 20 }}>
-            <SafeAreaView forceInset={{ top: "always", horizontal: "never" }}>
-              <View style={{ height: 50, backgroundColor: "red" }}>
-                <Text style={{ color: "white" }}>
-                  Aca va el componente de la foto del usuario
-                </Text>
+            <SafeAreaView forceInset={{flex : 1 }}>
+              <View style={{ height: 150, backgroundColor: 'white', alignItems:'center', justifyContent:'center'}}>
+               <Image source ={ require ('../images/avatar.png')} style={{height:120, width: 120, borderRadius:60 }}/>
+          
               </View>
               <DrawerItemList {...props} />
             </SafeAreaView>

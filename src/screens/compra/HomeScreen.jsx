@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet, Text} from 'react-native';
 import Title from '../../components/TextH1.jsx'
 import ProductItem from '../../components/ProductItem.jsx'
 import RectangleButton from '../../components/LongRectangleButton.jsx'
 import Banner from '../../components/Banner.jsx'
+import {Header, left, Right, Icon, Left} from 'native-base'
 
 
 const HomeScreen = (props) => {
@@ -13,6 +14,8 @@ const HomeScreen = (props) => {
   return (
     <View style={styles.container}>
 
+     
+    
       <Title style={{flex: 1,alignItems: "flex-start"}} text='Candidatos a BoluPremio del año' />
 
       <ProductItem
@@ -46,6 +49,7 @@ const HomeScreen = (props) => {
 export const HomeNavOptions = (props) => {
   return {
     headerTitle: "Bolushop",
+    
   };
 };
 
