@@ -1,6 +1,9 @@
-//Agregar colores a continuacion
+// Agregar colores a continuacion
 
-export const colors = {
-    modalAuthBackground: '#00000099',
-    defaultBackground: "white"
-}
+const colors = {
+  modalAuthBackground: '#00000099',
+  defaultBackground: 'white',
+  colorGimenita: '#BBBBBB',
+};
+
+export default colors;

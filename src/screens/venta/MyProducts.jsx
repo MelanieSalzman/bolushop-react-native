@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet} from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx'
 import TextH1 from '../../components/TextH1.jsx'
 
 
-const ProductList = (props) => {
+const MyProducts = (props) => {
 
     //Array de productos de ejemplo
     const arrayProducts = [
@@ -55,7 +55,7 @@ const ProductList = (props) => {
   return (
     <SafeAreaView style={styles.container}>
 
-        <TextH1 text="Todos los productos de bolushop" />
+        <TextH1 text="Mis productos" />
 
         <FlatList style={styles.title}
             data={products}
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
     
   });
 
-export default ProductList;
+export default MyProducts;
