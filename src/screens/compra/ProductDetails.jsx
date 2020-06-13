@@ -17,7 +17,7 @@ const ProductDetails = (props) => {
       </View>
 
 
-      <View styles={styles.rectangle}>
+      <View style={styles.rectangle}>
         <Rectangle />
       </View>
 
@@ -48,15 +48,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "blue",
+  
   },
 
   description: {
     flex: 0.1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor:"red",
-    
+
 
   },
 
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     
-    backgroundColor:"blue",
+
   },
   buy:{
     flex: 0.1,
