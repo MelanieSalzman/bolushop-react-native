@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button,
+  View, Text, Button, StyleSheet,
 } from 'react-native';
 import LoginModal from '../../components/LoginModal';
+import Rectangle from '../../components/Rectangle';
+import ProductImageDetail from '../../components/ProductImageDetail';
+import TextH2 from '../../components/TextH2';
+import RectangleAdress from '../../components/RectangleAdress';
+import BuyButton from '../../components/BuyButton';
+import RectangleRating from '../../components/RectangleRating';
 
 const ProductDetails = (props) => {
   const [showModal, setShowModal] = useState(false);
 
+  const isLogged = () => {
+    // TODO: Check user
+    // if (user.token){
+    // }
+    setShowModal(true);
+  };
   const onLoginPress = () => {
     setShowModal(false);
   };
@@ -21,14 +33,31 @@ const ProductDetails = (props) => {
   };
 
   return (
-    <View>
-      <Text>Pantalla producto</Text>
-      <Button
-        title="Comprar"
-        onPress={() => {
-          setShowModal(true);
-        }}
-      />
+    <View style={styles.container}>
+
+      <View style={styles.image}>
+        <ProductImageDetail />
+      </View>
+
+      <View style={styles.rectangle}>
+        <Rectangle />
+      </View>
+
+      <View style={styles.description}>
+        <TextH2 text="aliqua do voluptate. Sint tempor voluptate ea veniam nisi enim nisi velit anim pariatur amet." />
+      </View>
+      <View style={styles.adress}>
+        <RectangleAdress />
+      </View>
+
+      <View style={styles.buy}>
+        <BuyButton text="COMPRAR" onPress={isLogged} />
+      </View>
+
+      <View style={styles.rating}>
+        <RectangleRating />
+      </View>
+
       <LoginModal
         isVisible={showModal}
         onLoginPress={onLoginPress}
@@ -38,5 +67,46 @@ const ProductDetails = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+
+  },
+  description: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  adress: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+
+  },
+  rating: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  image: {
+    flex: 0.4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rectangle: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buy: {
+    flex: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default ProductDetails;
