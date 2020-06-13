@@ -11,6 +11,7 @@ import ProductDetails from "../screens/compra/ProductDetails";
 import ProductList from "../screens/compra/ProductList";
 import { Platform, View, SafeAreaView, Text } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen"
 
 // import {
 //   PaginaInicio,
@@ -33,6 +34,10 @@ export const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="ProductList"
         component={ProductList}
+      />
+      <HomeStackNavigator.Screen 
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
       />
     </HomeStackNavigator.Navigator>
   );
