@@ -4,7 +4,7 @@ import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import { Ionicons } from '@expo/vector-icons';
 
 import {
-  Platform, View, SafeAreaView, Text,
+  Platform, View, SafeAreaView, Text, Image, Dimensions,
 } from 'react-native';
 import HomeScreen, { HomeNavOptions } from '../screens/compra/HomeScreen';
 import ProductDetails from '../screens/compra/ProductDetails';
@@ -12,6 +12,7 @@ import ProductList from '../screens/compra/ProductList';
 import ForgotPasswordScreen from '../screens/auth/ForgotPasswordScreen';
 import MyProducts from '../screens/venta/MyProducts';
 import MyAccount from '../screens/user/MyAccount';
+
 // import { Colors } from "react-native/Libraries/NewAppScreen";
 
 // import {
@@ -19,7 +20,9 @@ import MyAccount from '../screens/user/MyAccount';
 //   opcionesDeLaPantalla,
 // } from "../screens/main/PaginaInicio";
 
+const { width } = Dimensions.get('window');
 const HomeStackNavigator = createStackNavigator();
+
 export const HomeNavigator = () => (
   <HomeStackNavigator.Navigator>
     <HomeStackNavigator.Screen
@@ -58,20 +61,21 @@ export const MyAccountNavigator = () => (
 
 const HomeDrawerNavigator = createDrawerNavigator();
 export const HomeDrawer = () => (
-  <HomeDrawerNavigator.Navigator
-    drawerContent={(props) => (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-          <View style={{ height: 50, backgroundColor: 'red' }}>
-            <Text style={{ color: 'white' }}>
-              Aca va el componente de la foto del usuario
-            </Text>
-          </View>
-          <DrawerItemList {...props} />
-        </SafeAreaView>
-      </View>
-    )}
+  <HomeDrawerNavigator.Navigator drawerContent={(props) => (
+    <View style={{ flex: 1, paddingTop: 20 }}>
+      <SafeAreaView forceInset={{ flex: 1 }}>
+        <View style={{
+          height: 150, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center',
+        }}
+        >
+          <Image source={require('../images/avatar.png')} style={{ height: 120, width: 120, borderRadius: 60 }} />
+        </View>
+        <DrawerItemList {...props} />
+      </SafeAreaView>
+    </View>
+  )}
   >
+
     <HomeDrawerNavigator.Screen
       name="Inicio"
       component={HomeNavigator}

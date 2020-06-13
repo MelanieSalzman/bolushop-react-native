@@ -1,25 +1,23 @@
-
-
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {colors} from '../../constants/colors';
+import {
+  Image, StyleSheet, Text, View,
+} from 'react-native';
+import colors from '../../constants/colors';
 
-const ForgotPasswordScreen = (props) => {
-  return (
-    <View style={styles.container}>
-      <View>
-        <View style={styles.forgotPasswordFirstTextContainer}>
-           <Text style={styles.forgotPasswordMessagesText}>¿Olvidaste tu contraseña?</Text>
-          <Image style={ styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaTriste.png')}/>
-        </View>
-        <View style={styles.forgotPasswordSecondTextContainer}>
-          <Image style={ styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaFeliz.png')}/>
-          <Text style={styles.forgotPasswordMessagesText}>No te preocupes!</Text>
-        </View>
+const ForgotPasswordScreen = (props) => (
+  <View style={styles.container}>
+    <View>
+      <View style={styles.forgotPasswordFirstTextContainer}>
+        <Text style={styles.forgotPasswordMessagesText}>¿Olvidaste tu contraseña?</Text>
+        <Image style={styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaTriste.png')} />
+      </View>
+      <View style={styles.forgotPasswordSecondTextContainer}>
+        <Image style={styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaFeliz.png')} />
+        <Text style={styles.forgotPasswordMessagesText}>No te preocupes!</Text>
       </View>
     </View>
-  );
-};
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
