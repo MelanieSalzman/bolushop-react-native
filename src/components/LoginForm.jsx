@@ -18,12 +18,11 @@ const LoginForm = (props) => {
 
     const onLoginPress = () => {
         props.onLoginPress();
-
-        fetch("http://10.0.2.2:3000/api/auth/login", {
+        
+        fetch("http://10.0.2.2:3000/api/auth/register", {
             method: "POST",
             headers: {
-                'Content-Type': q
-                'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 "email": email,
