@@ -8,13 +8,16 @@ import {
     TextInput,
     TouchableOpacity,
     CheckBox,
+    Alert,
 } from 'react-native';
 import colors from '../constants/colors';
-import { AsyncStorage } from 'react-native';
+import {registerUser} from '../api/userAPI'
+
 
 const RegisterForm = (props) => {
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [birth, setBirth] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,28 +26,8 @@ const RegisterForm = (props) => {
     const onRegisterPress = () => {
         props.onRegisterPress();
 
-           fetch("http://10.0.2.2:3000/api/auth/register", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "email": email,
-                    "password": password
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    saveTokenToStorage = async () => {
-                    try {
-                        AsyncStorage.setItem('token', data.token)
-                    } catch (e) {
-                        console.log("Error: ", e)
-                    }
-                }
-                })
-        
+        registerUser(email,password)
+
     };
 
 
@@ -59,6 +42,14 @@ const RegisterForm = (props) => {
                     textContentType="name"
                     value={name}
                     onChangeText={(name) => setName(name)}
+                />
+
+                <TextInput
+                    style={styles.inputStyleRegister}
+                    placeholder="Nombre de usuario"
+                    textContentType="name"
+                    value={username}
+                    onChangeText={(username) => setUsername(username)}
                 />
 
                 <TextInput

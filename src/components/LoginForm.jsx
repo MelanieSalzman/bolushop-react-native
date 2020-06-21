@@ -7,9 +7,11 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    CheckBox,
+    CheckBox
 } from 'react-native';
 import colors from '../constants/colors';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 const LoginForm = (props) => {
 
@@ -18,8 +20,8 @@ const LoginForm = (props) => {
 
     const onLoginPress = () => {
         props.onLoginPress();
-        
-        fetch("http://10.0.2.2:3000/api/auth/register", {
+
+        fetch("http://10.0.2.2:3000/api/auth/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -32,13 +34,13 @@ const LoginForm = (props) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                saveTokenToStorage = async () => {
-                try {
-                    AsyncStorage.setItem('token', data.token)
-                } catch (e) {
-                    console.log("Error: ", e)
+                saveTokenToStorage = async (data) => {
+                    try {
+                        AsyncStorage.setItem('token', data.token)
+                    } catch (e) {
+                        console.log("Error: ", e)
+                    }
                 }
-            }
             })
     };
 
@@ -70,7 +72,7 @@ const LoginForm = (props) => {
                     secureTextEntry={true}
                     value={password}
                     onChangeText={(pass) => setPassword(pass)} />
-                    
+
             </View>
             <View style={styles.actionsContainer}>
                 <TouchableOpacity onPress={onLoginPress}>

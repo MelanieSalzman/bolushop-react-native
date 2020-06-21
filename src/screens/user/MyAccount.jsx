@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
 import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'
@@ -7,6 +7,8 @@ import SimpleButton from '../../components/SimpleButton.jsx'
 import LongRectangleButton from '../../components/LongRectangleButton.jsx'
 import Line from '../../components/Line.jsx'
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-community/async-storage';
+import {profileUser} from '../../api/userAPI'
 
 const MyAccount = (props) => {
 
@@ -19,13 +21,46 @@ const MyAccount = (props) => {
     const [enableWritingBirth, setEnableWritingBirth] = useState(false);
     const [enableWritingPhone, setEnableWritingPhone] = useState(false);
 
-    const EnableFunction = (component, set) => {
+    const [email, setEmail] = useState('');
+
+    const EnableFunction = (component, set, value) => {
         if (component) {
             set(false)
+            console.log("pasa",value)
+            setEmail(value)
+            
         } else {
             set(true)
+            
         }
     }
+
+
+    const removeItemFromStorage = async (key) => {
+
+        try {
+            await AsyncStorage.removeItem(key);
+            return true;
+        }
+        catch (exception) {
+            return false;
+        }
+    }
+
+    const logout = async () => {
+
+        if (removeItemFromStorage("token")) {
+            props.navigation.navigate("HomeScreen")
+        } else {
+            console.log("No se pudo cerrar sesion")
+        }
+    }
+
+    useEffect(() => {
+        const data = profileUser()
+        setEmail(data.email)
+
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -47,9 +82,12 @@ const MyAccount = (props) => {
                     <Line />
                     <InputProfile
                         name='Correo electronico'
-                        value='salzmanmelanie@gmail.com'
+                        value={email}
                         edit={enableWritingEmail}
-                        onPress={(e) => EnableFunction(enableWritingEmail, setEnableWritingEmail)} />
+                        onChangeText = {value => setEmail(value)}
+                        onPress={(e,email) => {
+                            EnableFunction(enableWritingEmail, setEnableWritingEmail, email);
+                            }} />
                     <Line />
                     <InputProfile
                         name='Contraseña'
@@ -66,31 +104,31 @@ const MyAccount = (props) => {
                     <InputProfile
                         name='Nombre'
                         value='Melanie'
-                        edit={enableWritingName} 
+                        edit={enableWritingName}
                         onPress={(e) => EnableFunction(enableWritingName, setEnableWritingName)} />
                     <Line />
                     <InputProfile
                         name='Apellido'
                         value='Salzman'
-                        edit={enableWritingSurname} 
+                        edit={enableWritingSurname}
                         onPress={(e) => EnableFunction(enableWritingSurname, setEnableWritingSurname)} />
                     <Line />
                     <InputProfile
                         name='Pagina web'
                         value='www.melanielamejor.com.ar'
-                        edit={enableWritingWeb} 
+                        edit={enableWritingWeb}
                         onPress={(e) => EnableFunction(enableWritingWeb, setEnableWritingWeb)} />
                     <Line />
                     <InputProfile
                         name='Fecha de nacimiento'
                         value='28 - 03 - 1997'
-                        edit={enableWritingBirth} 
+                        edit={enableWritingBirth}
                         onPress={(e) => EnableFunction(enableWritingBirth, setEnableWritingBirth)} />
                     <Line />
                     <InputProfile
                         name='Telefono'
                         value='11 - 5145 - 4719'
-                        edit={enableWritingPhone} 
+                        edit={enableWritingPhone}
                         onPress={(e) => EnableFunction(enableWritingPhone, setEnableWritingPhone)} />
                     <Line />
                 </View>
@@ -100,7 +138,7 @@ const MyAccount = (props) => {
                     <SimpleButton title='Guardar' navigation={props.navigation} screen="MyAccount" />
                 </View>
                 <View style={styles.button}>
-                    <LongRectangleButton navigation={props.navigation} text="Cerrar sesion" screen="HomeScreen" />
+                    <LongRectangleButton onPress={logout} text="Cerrar sesion" />
                 </View>
             </ScrollView>
 
