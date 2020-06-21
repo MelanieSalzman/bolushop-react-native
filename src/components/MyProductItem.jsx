@@ -6,32 +6,39 @@ import ProductImage from './ProductImage';
 import CostBg from './CostBg';
 import colors from '../constants/colors';
 
-const MyProductItem = (props) => (
-  <View style={styles.itemContainer}>
-    <View style={styles.itemContent}>
-      <View style={styles.itemLeft}>
-        <ProductImage />
-        <CostBg text={props.cost} />
-      </View>
-      <View style={styles.itemRight}>
-        <TextH2 text={props.name} />
-        <TextH2 text={props.description} />
-        <View style={styles.actionsContainer}>
-          <TouchableOpacity style={styles.actionOption}>
-            <MaterialIcons name="edit" size={23} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionOption}>
-            <MaterialIcons name="delete" size={23} />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.actionOption, { marginRight: 30 }]}>
-            <MaterialIcons name="visibility" size={23} />
-          </TouchableOpacity>
-        </View>
-      </View>
+const MyProductItem = (props) => {
+  const { item, navigation } = props;
+  const onItemRemovePress = (itemId) => {
+    props.onItemRemovePress(itemId);
+  };
 
+  return (
+    <View style={styles.itemContainer}>
+      <View style={styles.itemContent}>
+        <View style={styles.itemLeft}>
+          <ProductImage />
+          <CostBg text={item.cost} />
+        </View>
+        <View style={styles.itemRight}>
+          <TextH2 text={item.name} />
+          <TextH2 text={item.description} />
+          <View style={styles.actionsContainer}>
+            <TouchableOpacity style={styles.actionOption} onPress={() => { navigation.navigate('AddProduct', { editItem: item }); }}>
+              <MaterialIcons name="edit" size={23} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionOption} onPress={() => onItemRemovePress(item.id)}>
+              <MaterialIcons name="delete" size={23} />
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.actionOption, { marginRight: 30 }]}>
+              <MaterialIcons name="visibility" size={23} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   itemContainer: {
