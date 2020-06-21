@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import TextH1 from './TextH1.jsx';
+import TextH1 from './TextH1';
+import ProductImage from './ProductImage';
 
 const CostBg = (props) => {
   const stringCost = `ARS ${props.text}`;

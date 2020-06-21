@@ -3,6 +3,7 @@ import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx';
 import TextH1 from '../../components/TextH1.jsx';
+import colors from '../../constants/colors.js';
 
 const ProductList = (props) => {
   // Array de productos de ejemplo

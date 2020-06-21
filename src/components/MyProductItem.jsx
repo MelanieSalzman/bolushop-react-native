@@ -4,12 +4,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import TextH2 from './TextH2';
 import ProductImage from './ProductImage';
 import CostBg from './CostBg';
-import colors from '../constants/colors';
 
 const MyProductItem = (props) => {
-  const { item, navigation } = props;
+  const { item } = props;
+
   const onItemRemovePress = (itemId) => {
     props.onItemRemovePress(itemId);
+  };
+
+  const onItemEditPress = (item) => {
+    props.onItemEditPress(item);
   };
 
   return (
@@ -23,7 +27,7 @@ const MyProductItem = (props) => {
           <TextH2 text={item.name} />
           <TextH2 text={item.description} />
           <View style={styles.actionsContainer}>
-            <TouchableOpacity style={styles.actionOption} onPress={() => { navigation.navigate('AddProduct', { editItem: item }); }}>
+            <TouchableOpacity style={styles.actionOption} onPress={() => onItemEditPress(item)}>
               <MaterialIcons name="edit" size={23} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionOption} onPress={() => onItemRemovePress(item.id)}>

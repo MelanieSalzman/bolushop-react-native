@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import TextH2 from './TextH2.jsx';
-import ProductImage from './ProductImage.jsx';
-import CostBg from './CostBg.jsx';
+import TextH2 from './TextH2';
+import ProductImage from './ProductImage';
+import CostBg from './CostBg';
 
 const ProductItem = (props) => (
 
@@ -10,14 +10,13 @@ const ProductItem = (props) => (
     <View style={styles.leftBox}>
       <ProductImage />
       <CostBg text={props.cost} />
-
     </View>
+
     <View style={styles.rightBox}>
       <TouchableOpacity onPress={() => {
         props.navigation.navigate('ProductDetails');
       }}
       >
-
         <TextH2 text={props.name} />
         <TextH2 text={props.description} />
       </TouchableOpacity>

@@ -6,7 +6,7 @@ import colors from '../../constants/colors';
 import LoadingOverlay from '../../components/LoadingOverlay';
 
 const AddProductScreen = ({ route, navigation }) => {
-  const [product, setProduct] = useState(route.params?.editItem);
+  const [product, setProduct] = useState(route.params?.editItem); // Item {} - undefined
   const [isLoading, setLoading] = useState(false);
 
   const onSavePress = () => {
@@ -37,7 +37,7 @@ const AddProductScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.normalInput}
             placeholder="Nombre"
-            value={product && product.name}
+            value={product && product.name} // product ? product.name : ""
           />
           <TextInput
             style={styles.normalInput}

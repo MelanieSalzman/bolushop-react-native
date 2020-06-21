@@ -29,6 +29,33 @@ const MyProducts = (props) => {
       url: 'www.lamagiadelastazasxd.com.ar/altataza',
     },
 
+    {
+      id: 3,
+      name: 'Taza porta galletitas 2',
+      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+      cost: '19.99',
+      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+      url: 'www.lamagiadelastazasxd.com.ar/altataza',
+    },
+
+    {
+      id: 4,
+      name: 'Taza porta galletitas 2',
+      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+      cost: '19.99',
+      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+      url: 'www.lamagiadelastazasxd.com.ar/altataza',
+    },
+
+    {
+      id: 5,
+      name: 'Taza porta galletitas 2',
+      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+      cost: '19.99',
+      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+      url: 'www.lamagiadelastazasxd.com.ar/altataza',
+    },
+
   ];
 
   // Representa el array de productos
@@ -48,6 +75,10 @@ const MyProducts = (props) => {
     setItemToDelete(itemId);
   };
 
+  const onItemEditPress = (item) => {
+    props.navigation.navigate('AddProduct', { editItem: item });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -56,7 +87,7 @@ const MyProducts = (props) => {
         renderItem={({ item }) => (
           <MyProductItem
             item={item}
-            navigation={props.navigation}
+            onItemEditPress={onItemEditPress}
             onItemRemovePress={onItemRemovePress}
           />
         )}
