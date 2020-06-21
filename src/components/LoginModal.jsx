@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,93 +10,13 @@ import {
   CheckBox,
 } from 'react-native';
 import colors from '../constants/colors';
+import RenderLogin from './LoginForm'
+import RenderRegister from './RegisterForm'
+import { AsyncStorage } from 'react-native';
 
 const LoginModal = (props) => {
+
   const [isLogin, setIsLogin] = useState(true);
-  const onLoginPress = () => {
-    props.onLoginPress();
-  };
-
-  const onRegisterPress = () => {
-    props.onRegisterPress();
-  };
-
-  const onForgotPassword = () => {
-    props.onForgotPassword();
-  };
-  const RenderLogin = () => (
-    <View style={styles.card}>
-      <View>
-        <Image
-          style={styles.imageContainer}
-          source={require('../../assets/images/bolushop.jpeg')}
-        />
-      </View>
-
-      <View style={styles.inputsContainer}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Direccion de correo electronico"
-        />
-        <TextInput style={styles.inputStyle} placeholder="Contraseña" />
-      </View>
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity onPress={onLoginPress}>
-          <View style={styles.loginButtonContainer}>
-            <Text>Iniciar Sesion</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onForgotPassword}>
-          <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
-  const RenderRegister = () => (
-    <View style={styles.card}>
-      <View style={styles.inputsContainerRegister}>
-        <TextInput
-          style={styles.inputStyleRegister}
-          placeholder="Direccion de correo electronico"
-        />
-
-        <TextInput
-          style={styles.inputStyleRegister}
-          placeholder="Contraseña"
-        />
-
-        <TextInput
-          style={styles.inputStyleRegister}
-          placeholder="Direccion de correo electronico"
-        />
-
-        <TextInput
-          style={styles.inputStyleRegister}
-          placeholder="Contraseña"
-        />
-
-        <TextInput
-          style={styles.inputStyleRegister}
-          placeholder="Contraseña"
-        />
-
-      </View>
-
-      <View style={styles.registerRowTerms}>
-        <CheckBox value />
-        <Text style={styles.registerTermsText}>Acepto los boluterminos y las bolucondiciones</Text>
-      </View>
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity onPress={onRegisterPress}>
-          <View style={styles.loginButtonContainer}>
-            <Text>Registrarme</Text>
-          </View>
-        </TouchableOpacity>
-
-      </View>
-    </View>
-  );
 
   return (
     <Modal visible={props.isVisible} animationType="slide" transparent>
@@ -115,7 +35,11 @@ const LoginModal = (props) => {
             <Text>Registro</Text>
           </TouchableOpacity>
         </View>
-        {isLogin ? <RenderLogin /> : <RenderRegister />}
+
+        {isLogin ? 
+        <RenderLogin onLoginPress={props.onLoginPress} 
+        onForgotPassword={props.onForgotPassword}/> : 
+        <RenderRegister onRegisterPress={props.onRegisterPress}/>}
 
       </View>
     </Modal>

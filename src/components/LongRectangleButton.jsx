@@ -3,14 +3,10 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import TextH2 from './TextH2.jsx';
 
 const LongRectangleButton = (props) => {
-  const { screen } = props;
   return (
 
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {
-        props.navigation.navigate(screen);
-      }}
-      >
+      <TouchableOpacity onPress={props.onPress}>
         <TextH2 text={props.text} />
       </TouchableOpacity>
     </View>
