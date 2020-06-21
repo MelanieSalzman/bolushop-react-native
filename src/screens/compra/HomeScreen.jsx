@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import {
-  Header, left, Right, Icon, Left,
-} from 'native-base';
+import { View, Image, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import Title from '../../components/TextH1';
 import ProductItem from '../../components/ProductItem';
 import RectangleButton from '../../components/LongRectangleButton';
 import Banner from '../../components/Banner';
+import colors from '../../constants/colors';
 
 const HomeScreen = (props) => {
   const bannerDescription = 'Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!';
@@ -48,7 +47,22 @@ const HomeScreen = (props) => {
 
 export const HomeNavOptions = (props) => ({
   headerTitle: 'Bolushop',
-
+  headerStyle: {
+    backgroundColor: colors.passwordInputBorder,
+  },
+  headerRight: () => (
+    <View style={styles.headerImageContainer}>
+      <Image style={styles.headerImage} source={require('../../../assets/images/caritaFelizHeader.png')} />
+    </View>
+  ),
+  headerLeft: () => (
+    <MaterialIcons
+      style={styles.menu}
+      name="menu"
+      size={30}
+      onPress={() => props.navigation.toggleDrawer()}
+    />
+  ),
 });
 
 const styles = StyleSheet.create({
@@ -56,6 +70,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: colors.defaultBackground,
+
+  },
+  menu: {
+    marginLeft: 20,
+  },
+  headerImageContainer: {
+    justifyContent: 'center',
+    marginRight: 20,
+  },
+  headerImage: {
+    height: 40,
+    width: 40,
   },
 });
 

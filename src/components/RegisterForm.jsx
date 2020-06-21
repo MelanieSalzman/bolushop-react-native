@@ -11,7 +11,7 @@ import {
     Alert,
 } from 'react-native';
 import colors from '../constants/colors';
-import {registerUser} from '../api/userAPI'
+import { registerUser } from '../api/userAPI'
 
 
 const RegisterForm = (props) => {
@@ -26,7 +26,7 @@ const RegisterForm = (props) => {
     const onRegisterPress = () => {
         props.onRegisterPress();
 
-        registerUser(email,password)
+        registerUser(email,password,username)
 
     };
 

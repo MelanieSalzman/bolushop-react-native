@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'
@@ -8,7 +8,7 @@ import LongRectangleButton from '../../components/LongRectangleButton.jsx'
 import Line from '../../components/Line.jsx'
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
-import {profileUser} from '../../api/userAPI'
+import { profileUser } from '../../api/userAPI'
 
 const MyAccount = (props) => {
 
@@ -22,16 +22,17 @@ const MyAccount = (props) => {
     const [enableWritingPhone, setEnableWritingPhone] = useState(false);
 
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
 
     const EnableFunction = (component, set, value) => {
         if (component) {
             set(false)
-            console.log("pasa",value)
+            console.log("pasa", value)
             setEmail(value)
-            
+
         } else {
             set(true)
-            
+
         }
     }
 
@@ -47,6 +48,7 @@ const MyAccount = (props) => {
         }
     }
 
+
     const logout = async () => {
 
         if (removeItemFromStorage("token")) {
@@ -56,10 +58,11 @@ const MyAccount = (props) => {
         }
     }
 
-    useEffect(() => {
-        const data = profileUser()
+    useEffect( async () => {
+        const data = await profileUser()
         setEmail(data.email)
-
+        setUsername(data.username)
+        console.log("la data que me trae en useEffect", data)
     }, [])
 
     return (
@@ -76,7 +79,7 @@ const MyAccount = (props) => {
                     <Line />
                     <InputProfile
                         name='Nombre de usuario'
-                        value='MelanieSalzman'
+                        value={username}
                         edit={enableWritingUsername}
                         onPress={(e) => EnableFunction(enableWritingUsername, setEnableWritingUsername)} />
                     <Line />
@@ -84,10 +87,10 @@ const MyAccount = (props) => {
                         name='Correo electronico'
                         value={email}
                         edit={enableWritingEmail}
-                        onChangeText = {value => setEmail(value)}
-                        onPress={(e,email) => {
+                        onChangeText={value => setEmail(value)}
+                        onPress={(e, email) => {
                             EnableFunction(enableWritingEmail, setEnableWritingEmail, email);
-                            }} />
+                        }} />
                     <Line />
                     <InputProfile
                         name='Contraseña'
@@ -153,35 +156,35 @@ const styles = StyleSheet.create({
     },
     buttons: {
         flex: 1,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     form: {
         flex: 1,
         margin: 10,
-        justifyContent: "center",
-        alignItems: "center",
-        marginBottom: 20
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
     },
     image: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     title: {
         flex: 1,
         marginLeft: 10,
-        justifyContent: "center",
-        alignItems: "flex-start",
-        marginTop: 20
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginTop: 20,
     },
     button: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 10
-    }
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+    },
 });
 
 export default MyAccount;
