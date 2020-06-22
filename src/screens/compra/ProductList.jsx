@@ -4,65 +4,71 @@ import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx';
 import TextH1 from '../../components/TextH1.jsx';
 import colors from '../../constants/colors.js';
-import {getProducts} from '../../api/productAPI'
+import { getProducts } from '../../api/productAPI'
 
 
 const ProductList = (props) => {
-  
+
 
 
 
 
   // Array de productos de ejemplo
- /* const arrayProducts = [
-    {
-      id: 1,
-      name: 'Producto 1',
-      description: 'Descripcion producto 1',
-      cost: '100',
-    },
-
-    {
-      id: 2,
-      name: 'Producto 2',
-      description: 'Descripcion producto 2',
-      cost: '100',
-    },
-    {
-      id: 3,
-      name: 'Producto 3',
-      description: 'Descripcion producto 3',
-      cost: '100',
-    },
-    {
-      id: 4,
-      name: 'Producto 4',
-      description: 'Descripcion producto 4',
-      cost: '100',
-    },
-    {
-      id: 5,
-      name: 'Producto 5',
-      description: 'Descripcion producto 5',
-      cost: '100',
-    },
-    {
-      id: 6,
-      name: 'Producto 6',
-      description: 'Descripcion producto 6',
-      cost: '100',
-    },
-  ];
-*/
+  /* const arrayProducts = [
+     {
+       id: 1,
+       name: 'Producto 1',
+       description: 'Descripcion producto 1',
+       cost: '100',
+     },
+ 
+     {
+       id: 2,
+       name: 'Producto 2',
+       description: 'Descripcion producto 2',
+       cost: '100',
+     },
+     {
+       id: 3,
+       name: 'Producto 3',
+       description: 'Descripcion producto 3',
+       cost: '100',
+     },
+     {
+       id: 4,
+       name: 'Producto 4',
+       description: 'Descripcion producto 4',
+       cost: '100',
+     },
+     {
+       id: 5,
+       name: 'Producto 5',
+       description: 'Descripcion producto 5',
+       cost: '100',
+     },
+     {
+       id: 6,
+       name: 'Producto 6',
+       description: 'Descripcion producto 6',
+       cost: '100',
+     },
+   ];
+ */
   // Representa el array de productos
 
   const [products, setProducts] = useState('');
-  useEffect( async () => {
-    const data = await getProducts()
-    setProducts(data)
-    
-    console.log("la data que me trae en useEffect", data)
-}, [])
+  useEffect(
+
+    () => {
+
+      const list = async () => {
+        const data = await getProducts()
+        setProducts(data)
+      }
+
+      list()
+    }
+    , [])
 
 
   return (

@@ -9,7 +9,7 @@ const Rectangle = (props) => {
     return (
 
         <View style={styles.container}>
-        <TextH2 text="Producto"/></View>
+        <TextH2 text={props.text}/></View>
 
 
                  

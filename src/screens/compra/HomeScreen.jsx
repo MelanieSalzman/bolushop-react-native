@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Title from '../../components/TextH1';
@@ -6,20 +6,29 @@ import ProductItem from '../../components/ProductItem';
 import RectangleButton from '../../components/LongRectangleButton';
 import Banner from '../../components/Banner';
 import colors from '../../constants/colors';
-import {getProducts} from '../../api/productAPI'
+import { getProducts } from '../../api/productAPI'
 
 const HomeScreen = (props) => {
   const bannerDescription = 'Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!';
 
   const [product1, setProduct1] = useState('');
   const [product2, setProduct2] = useState('');
-  useEffect(async () => {
-    const data = await getProducts()
-    setProduct1(data[1])
-    setProduct2(data[2])
 
-    console.log("la data que me trae en useEffect", data)
-  }, [])
+
+  useEffect(
+
+    () => {
+
+      const setterProducts = async () => {
+        const data = await getProducts()
+        setProduct1(data[1])
+        setProduct2(data[2])
+
+        console.log("la data que me trae en useEffect", data)
+      }
+      setterProducts()
+    }
+    , [])
 
   return (
     <View style={styles.container}>

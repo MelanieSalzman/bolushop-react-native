@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button, StyleSheet,
+  View, Text, Button, StyleSheet, Linking
 } from 'react-native';
 import LoginModal from '../../components/LoginModal';
 import Rectangle from '../../components/Rectangle';
@@ -9,6 +9,7 @@ import TextH2 from '../../components/TextH2';
 import RectangleAdress from '../../components/RectangleAdress';
 import BuyButton from '../../components/BuyButton';
 import RectangleRating from '../../components/RectangleRating';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ProductDetails = ({ route, navigation }) => {
 
@@ -22,12 +23,20 @@ const ProductDetails = ({ route, navigation }) => {
   const [details, setDetails] = useState(product.details);
   const [web, setWeb] = useState(product.web);
   
+  const [token, setToken] = useState('');
 
-  const isLogged = () => {
-    // TODO: Check user
-    // if (user.token){
-    // }
-    setShowModal(true);
+  const isLogged = async () => {
+    
+    const tokenreceived = await AsyncStorage.getItem("token")
+    setToken(tokenreceived)
+    if(token!=''){
+      Linking.openURL(web)
+      console.log("paso por aca link")
+    }
+    else{
+      console.log("paso por aca setModal")
+      setShowModal(true);
+    }
   };
   const onLoginPress = () => {
     setShowModal(false);
@@ -50,7 +59,7 @@ const ProductDetails = ({ route, navigation }) => {
       </View>
 
       <View style={styles.rectangle}>
-        <Rectangle />
+        <Rectangle text={name} />
       </View>
 
       <View style={styles.description}>
