@@ -21,7 +21,7 @@ const MyProductItem = (props) => {
       <View style={styles.itemContent}>
         <View style={styles.itemLeft}>
           <ProductImage />
-          <CostBg text={item.cost} />
+          <CostBg text={item.price} />
         </View>
         <View style={styles.itemRight}>
           <TextH2 text={item.name} />
@@ -30,7 +30,7 @@ const MyProductItem = (props) => {
             <TouchableOpacity style={styles.actionOption} onPress={() => onItemEditPress(item)}>
               <MaterialIcons name="edit" size={23} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionOption} onPress={() => onItemRemovePress(item.id)}>
+            <TouchableOpacity style={styles.actionOption} onPress={() => onItemRemovePress(item._id)}>
               <MaterialIcons name="delete" size={23} />
             </TouchableOpacity>
             <TouchableOpacity style={[styles.actionOption, { marginRight: 30 }]}>

@@ -3,18 +3,20 @@ import {
   View, Image, Text, StyleSheet,
 } from 'react-native';
 import colors from '../../constants/colors';
-
-const UserInfoDrawer = () => (
+/*{props.username ? props.username : 'Usuario'}*/
+const UserInfoDrawer = (props) =>
+  (
   <View style={styles.container}>
     <View style={styles.userInfoContainer}>
       <Image
         source={require('../../images/avatar.png')}
         style={styles.userImage}
       />
+      
       <Text style={styles.userNameText}>¡Hola Steven!</Text>
     </View>
   </View>
-);
+)
 
 const styles = StyleSheet.create({
   container: {

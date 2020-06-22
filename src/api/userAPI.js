@@ -45,11 +45,56 @@ export const profileUser = async () => {
             Authorization: "Bearer " + token
         })
     })
-    console.log("esta es la res",res)
+    console.log("esta es la res", res)
     const data = await res.json()
-    console.log("la data que me trae profile es:",data)
-    console.log("la data que me trae profile es:",data.email)
+    console.log("la data que me trae profile es:", data)
+    console.log("la data que me trae profile es:", data.email)
 
     return data;
+
+}
+
+export const loginUser = async (email, password) => {
+
+    let login = false
+    try {
+        const res = await fetch("http://10.0.2.2:3000/api/auth/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            })
+        })
+
+        const data = await res.json()
+
+        await AsyncStorage.setItem('token', data.token)
+
+        if (data.token != null) {
+            login = true
+        }
+
+        return login;
+    }
+    catch (e) {
+        console.log("Error: ", e)
+    }
+}
+
+export const nameMenu = async () => {
+
+    const token = await AsyncStorage.getItem("token")
+
+    const res = await fetch('http://10.0.2.2:3000/api/auth/profile', {
+        headers: new Headers({
+            Authorization: "Bearer " + token
+        })
+    })
+    const data = await res.json()
+
+    return data.username;
 
 }

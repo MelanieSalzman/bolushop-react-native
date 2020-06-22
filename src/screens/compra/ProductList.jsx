@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx';
 import TextH1 from '../../components/TextH1.jsx';
 import colors from '../../constants/colors.js';
+import {getProducts} from '../../api/productAPI'
+
 
 const ProductList = (props) => {
+  
+
+
+
+
   // Array de productos de ejemplo
-  const arrayProducts = [
+ /* const arrayProducts = [
     {
       id: 1,
       name: 'Producto 1',
@@ -46,9 +53,17 @@ const ProductList = (props) => {
       cost: '100',
     },
   ];
-
+*/
   // Representa el array de productos
-  const [products, setProducts] = useState(arrayProducts);
+
+  const [products, setProducts] = useState('');
+  useEffect( async () => {
+    const data = await getProducts()
+    setProducts(data)
+    
+    console.log("la data que me trae en useEffect", data)
+}, [])
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,14 +75,11 @@ const ProductList = (props) => {
         data={products}
         renderItem={({ item }) => (
           <ProductItem
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            cost={item.cost}
+            item={item}
             navigation={props.navigation}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id.toString()}
       />
 
     </SafeAreaView>

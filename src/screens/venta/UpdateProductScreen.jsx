@@ -4,25 +4,26 @@ import {
 } from 'react-native';
 import colors from '../../constants/colors';
 import LoadingOverlay from '../../components/LoadingOverlay';
-import  { addProduct } from '../../api/productAPI'
+import { updateProduct } from '../../api/productAPI'
 
 
 
-const AddProductScreen = ({ route, navigation }) => {
+const UpdateProductScreen = ({ route, navigation }) => {
   const [product, setProduct] = useState(route.params?.editItem); // Item {} - undefined
   const [isLoading, setLoading] = useState(false);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [details, setDetails] = useState('');
-  const [web, setWeb] = useState('');
-  
+
+  const [id, setId] = useState(product._id);
+  const [name, setName] = useState(product.name);
+  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price);
+  const [details, setDetails] = useState(product.details);
+  const [web, setWeb] = useState(product.web);
+
 
   const onSavePress = () => {
     setLoading(true);
-   
 
-    const added = addProduct(name,price,description,details,web)
+    const added = updateProduct(id, name, description, price, details, web)
     console.log('esto es added', added)
 
     setTimeout(() => {
@@ -42,7 +43,7 @@ const AddProductScreen = ({ route, navigation }) => {
               source={require('../../images/ImageRandom.png')}
               style={styles.image}
             />
-            <TouchableOpacity style={styles.selectImageButtonContainer} onPress={() => {}}>
+            <TouchableOpacity style={styles.selectImageButtonContainer} onPress={() => { }}>
               <Text style={styles.selectFileText}>Seleccionar archivo</Text>
             </TouchableOpacity>
           </View>
@@ -53,38 +54,38 @@ const AddProductScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.normalInput}
             placeholder="Nombre"
-            value={product ? product.name : name} // product ? product.name : ""
-            onChangeText={(text)=>{setName(text)}}
+            value={name} // product ? product.name : ""
+            onChangeText={(text) => { setName(text) }}
           />
           <TextInput
             style={styles.normalInput}
             maxLength={8}
             placeholder="Precio $"
             keyboardType="numeric"
-            value={product ? product.cost : price}
-            onChangeText={(text)=>{setPrice(text)}}
+            value={price}
+            onChangeText={(text) => { setPrice(text) }}
           />
           <TextInput
             style={styles.normalInput}
             maxLength={180}
             placeholder="Descripción en 180 caracteres"
             multiline
-            value={product ? product.description : description}
-            onChangeText={(text)=>{setDescription(text)}}
+            value={description}
+            onChangeText={(text) => { setDescription(text) }}
           />
           <TextInput
             style={styles.normalInput}
             placeholder="Detalles"
             multiline
-            value={product ? product.details : details} 
-            onChangeText={(text)=>{setDetails(text)}}
+            value={details}
+            onChangeText={(text) => { setDetails(text) }}
           />
           <TextInput
             style={styles.normalInput}
             placeholder="Web del Producto"
             keyboardType="url"
-            value={product ? product.url : web}
-            onChangeText={(text)=>{setWeb(text)}}
+            value={web}
+            onChangeText={(text) => { setWeb(text) }}
           />
         </View>
       </ScrollView>
@@ -159,4 +160,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default AddProductScreen;
+export default UpdateProductScreen;
