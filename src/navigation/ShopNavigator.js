@@ -90,6 +90,15 @@ export const MyAccountNavigator = () => (
   </HomeStackNavigator.Navigator>
 );
 
+export const SellerNavigator = () => (
+  <HomeStackNavigator.Navigator>
+    <HomeStackNavigator.Screen
+      name="MyProducts"
+      component={MyProducts}
+    />
+  </HomeStackNavigator.Navigator>
+);
+
 const HomeDrawerNavigator = createDrawerNavigator();
 export const HomeDrawer = () => {
 
@@ -157,7 +166,7 @@ export const HomeDrawer = () => {
 
       <HomeDrawerNavigator.Screen
         name="Vender"
-        component={HomeNavigator}
+        component={SellerNavigator}
         options={{
           drawerIcon: (props) => (
             <MaterialIcons

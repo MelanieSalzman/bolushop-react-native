@@ -12,65 +12,71 @@ import { getProductsSeller } from '../../api/productAPI'
 
 const MyProducts = (props) => {
   // Array de productos de ejemplo
- /* const arrayProducts = [
-    {
-      id: 1,
-      name: 'Taza porta galletitas',
-      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-      cost: '19.99',
-      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-      url: 'www.lamagiadelastazasxd.com.ar/altataza',
-    },
-
-    {
-      id: 2,
-      name: 'Taza porta galletitas 2',
-      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-      cost: '19.99',
-      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-      url: 'www.lamagiadelastazasxd.com.ar/altataza',
-    },
-
-    {
-      id: 3,
-      name: 'Taza porta galletitas 2',
-      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-      cost: '19.99',
-      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-      url: 'www.lamagiadelastazasxd.com.ar/altataza',
-    },
-
-    {
-      id: 4,
-      name: 'Taza porta galletitas 2',
-      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-      cost: '19.99',
-      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-      url: 'www.lamagiadelastazasxd.com.ar/altataza',
-    },
-
-    {
-      id: 5,
-      name: 'Taza porta galletitas 2',
-      description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-      cost: '19.99',
-      details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-      url: 'www.lamagiadelastazasxd.com.ar/altataza',
-    },
-
-  ];
-*/
+  /* const arrayProducts = [
+     {
+       id: 1,
+       name: 'Taza porta galletitas',
+       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+       cost: '19.99',
+       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+       url: 'www.lamagiadelastazasxd.com.ar/altataza',
+     },
+ 
+     {
+       id: 2,
+       name: 'Taza porta galletitas 2',
+       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+       cost: '19.99',
+       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+       url: 'www.lamagiadelastazasxd.com.ar/altataza',
+     },
+ 
+     {
+       id: 3,
+       name: 'Taza porta galletitas 2',
+       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+       cost: '19.99',
+       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+       url: 'www.lamagiadelastazasxd.com.ar/altataza',
+     },
+ 
+     {
+       id: 4,
+       name: 'Taza porta galletitas 2',
+       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+       cost: '19.99',
+       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+       url: 'www.lamagiadelastazasxd.com.ar/altataza',
+     },
+ 
+     {
+       id: 5,
+       name: 'Taza porta galletitas 2',
+       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
+       cost: '19.99',
+       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
+       url: 'www.lamagiadelastazasxd.com.ar/altataza',
+     },
+ 
+   ];
+ */
   // Representa el array de productos
   const [products, setProducts] = useState('');
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
 
-  useEffect( async () => {
-    const data = await getProductsSeller()
-    setProducts(data)
-    
-    console.log("la data que me trae en useEffect", data)
-}, [])
+  useEffect(
+    () => {
+
+      const setterMyProducts = async () => {
+        const data = await getProductsSeller()
+        setProducts(data)
+
+        console.log("la data que me trae en useEffect", data)
+      }
+      setterMyProducts()
+    }
+    , [])
 
 
 
@@ -104,7 +110,7 @@ const MyProducts = (props) => {
           />
         )}
         keyExtractor={(item) => item._id.toString()}
-      /> 
+      />
       <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>
         <View style={styles.addProductContainer}>
           <Text>Agregar un nuevo producto</Text>

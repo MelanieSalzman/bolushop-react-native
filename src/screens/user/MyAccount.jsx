@@ -4,11 +4,11 @@ import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'
 import SimpleButton from '../../components/SimpleButton.jsx'
-import LongRectangleButton from '../../components/LongRectangleButton.jsx'
 import Line from '../../components/Line.jsx'
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import { profileUser } from '../../api/userAPI'
+import LogoutButton from '../../components/LogoutButton.jsx';
 
 const MyAccount = (props) => {
 
@@ -37,33 +37,25 @@ const MyAccount = (props) => {
     }
 
 
-    const removeItemFromStorage = async (key) => {
-
-        try {
-            await AsyncStorage.removeItem(key);
-            return true;
-        }
-        catch (exception) {
-            return false;
-        }
-    }
-
-
     const logout = async () => {
-
-        if (removeItemFromStorage("token")) {
-            props.navigation.navigate("HomeScreen")
-        } else {
-            console.log("No se pudo cerrar sesion")
-        }
+       await AsyncStorage.removeItem("token")
+        props.navigation.navigate("HomeScreen")
+        console.log("paso por aca")
     }
 
-    useEffect( async () => {
-        const data = await profileUser()
-        setEmail(data.email)
-        setUsername(data.username)
-        console.log("la data que me trae en useEffect", data)
-    }, [])
+    useEffect(
+
+        () => {
+
+            const setterProfile = async () => {
+                const data = await profileUser()
+                setEmail(data.email)
+                setUsername(data.username)
+                console.log("la data que me trae en useEffect", data)
+            }
+            setterProfile()
+        }
+        , [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -141,7 +133,7 @@ const MyAccount = (props) => {
                     <SimpleButton title='Guardar' navigation={props.navigation} screen="MyAccount" />
                 </View>
                 <View style={styles.button}>
-                    <LongRectangleButton onPress={logout} text="Cerrar sesion" />
+                    <LogoutButton onPress={logout} text="Cerrar sesion" />
                 </View>
             </ScrollView>
 
