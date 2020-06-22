@@ -10,7 +10,8 @@ const InputProfile = (props) => (
     </View>
     <View style={styles.input}>
       <TextInput
-        defaultValue={props.value}
+        value={props.value}
+        onChangeText={(text)=>{props.onChangeText(text)}}
         editable={props.edit}
         style={{ color: props.edit ? 'black' : 'gray' }}
       />

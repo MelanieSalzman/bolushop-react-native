@@ -49,6 +49,7 @@ export const profileUser = async () => {
     const data = await res.json()
     console.log("la data que me trae profile es:", data)
     console.log("la data que me trae profile es:", data.email)
+    console.log("la data que me trae profile es:", data.password)
 
     return data;
 

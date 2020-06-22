@@ -23,39 +23,47 @@ const MyAccount = (props) => {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-
-    const EnableFunction = (component, set, value) => {
+    const [password, setPassword] = useState('');
+/*
+    const EnableFunction = (component, set) => {
         if (component) {
             set(false)
-            console.log("pasa", value)
-            setEmail(value)
 
         } else {
             set(true)
 
         }
+    }*/
+
+    const onChangeTextEmail = (text) => {
+        setEmail(text)
+    }
+    const onChangeTextUsername = (text) => {
+        setUsername(text)
+    }
+
+    const onChangeTextPassword = (text) => {
+        setPassword(text)
     }
 
 
     const logout = async () => {
-       await AsyncStorage.removeItem("token")
+        await AsyncStorage.removeItem("token")
         props.navigation.navigate("HomeScreen")
         console.log("paso por aca")
     }
 
-    useEffect(
+    useEffect(() => {
 
-        () => {
-
-            const setterProfile = async () => {
-                const data = await profileUser()
-                setEmail(data.email)
-                setUsername(data.username)
-                console.log("la data que me trae en useEffect", data)
-            }
-            setterProfile()
+        const setterProfile = async () => {
+            const data = await profileUser()
+            setEmail(data.email)
+            setUsername(data.username)
+            setPassword(data.password)
+            console.log("la data que me trae en useEffect", data)
         }
-        , [])
+        setterProfile()
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -73,22 +81,22 @@ const MyAccount = (props) => {
                         name='Nombre de usuario'
                         value={username}
                         edit={enableWritingUsername}
-                        onPress={(e) => EnableFunction(enableWritingUsername, setEnableWritingUsername)} />
+                        onChangeText={onChangeTextUsername}
+                        onPress={() => setEnableWritingUsername(!enableWritingUsername)} />
                     <Line />
                     <InputProfile
-                        name='Correo electronico'
+                        name='Correo electronico' 
                         value={email}
                         edit={enableWritingEmail}
-                        onChangeText={value => setEmail(value)}
-                        onPress={(e, email) => {
-                            EnableFunction(enableWritingEmail, setEnableWritingEmail, email);
-                        }} />
+                        onChangeText={onChangeTextEmail}
+                        onPress={() => setEnableWritingEmail(!enableWritingEmail)} />
                     <Line />
                     <InputProfile
                         name='Contraseña'
-                        value='*********'
+                        value={password}
                         edit={enableWritingPassword}
-                        onPress={(e) => EnableFunction(enableWritingPassword, setEnableWritingPassword)} />
+                        onChangeText={onChangeTextPassword}
+                        onPress={() => setEnableWritingPassword(!enableWritingPassword)} />
                     <Line />
                 </View>
                 <View style={styles.title}>
