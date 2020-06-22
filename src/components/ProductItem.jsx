@@ -4,25 +4,28 @@ import TextH2 from './TextH2';
 import ProductImage from './ProductImage';
 import CostBg from './CostBg';
 
-const ProductItem = (props) => (
+const ProductItem = (props) => {
+  const { item } = props;
+
+  return(
 
   <View style={styles.container}>
     <View style={styles.leftBox}>
       <ProductImage />
-      <CostBg text={props.cost} />
+      <CostBg text={item.price} />
     </View>
 
     <View style={styles.rightBox}>
       <TouchableOpacity onPress={() => {
-        props.navigation.navigate('ProductDetails');
+        props.navigation.navigate('ProductDetails', { Item: item });
       }}
       >
-        <TextH2 text={props.name} />
-        <TextH2 text={props.description} />
+        <TextH2 text={item.name} />
+        <TextH2 text={item.description} />
       </TouchableOpacity>
     </View>
   </View>
-);
+)};
 
 const styles = StyleSheet.create({
   container: {

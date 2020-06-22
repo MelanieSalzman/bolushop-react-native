@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView, FlatList, StyleSheet, Modal, Image, TouchableOpacity,
 } from 'react-native';
@@ -7,10 +7,12 @@ import { Text, View } from 'native-base';
 import MyProductItem from '../../components/MyProductItem';
 import TextH1 from '../../components/TextH1';
 import colors from '../../constants/colors';
+import { getProductsSeller } from '../../api/productAPI'
+
 
 const MyProducts = (props) => {
   // Array de productos de ejemplo
-  const arrayProducts = [
+ /* const arrayProducts = [
     {
       id: 1,
       name: 'Taza porta galletitas',
@@ -57,11 +59,20 @@ const MyProducts = (props) => {
     },
 
   ];
-
+*/
   // Representa el array de productos
-  const [products, setProducts] = useState(arrayProducts);
+  const [products, setProducts] = useState('');
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
+
+  useEffect( async () => {
+    const data = await getProductsSeller()
+    setProducts(data)
+    
+    console.log("la data que me trae en useEffect", data)
+}, [])
+
+
 
   const deleteItem = () => {
     setProducts(
@@ -76,11 +87,12 @@ const MyProducts = (props) => {
   };
 
   const onItemEditPress = (item) => {
-    props.navigation.navigate('AddProduct', { editItem: item });
+    props.navigation.navigate('UpdateProduct', { editItem: item });
   };
 
   return (
     <SafeAreaView style={styles.container}>
+
       <FlatList
         style={styles.title}
         data={products}
@@ -91,8 +103,8 @@ const MyProducts = (props) => {
             onItemRemovePress={onItemRemovePress}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
-      />
+        keyExtractor={(item) => item._id.toString()}
+      /> 
       <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>
         <View style={styles.addProductContainer}>
           <Text>Agregar un nuevo producto</Text>

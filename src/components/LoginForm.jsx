@@ -10,7 +10,7 @@ import {
     CheckBox
 } from 'react-native';
 import colors from '../constants/colors';
-import AsyncStorage from '@react-native-community/async-storage';
+import {loginUser} from '../api/userAPI'
 
 
 const LoginForm = (props) => {
@@ -21,27 +21,8 @@ const LoginForm = (props) => {
     const onLoginPress = () => {
         props.onLoginPress();
 
-        fetch("http://10.0.2.2:3000/api/auth/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "email": email,
-                "password": password
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                saveTokenToStorage = async (data) => {
-                    try {
-                        AsyncStorage.setItem('token', data.token)
-                    } catch (e) {
-                        console.log("Error: ", e)
-                    }
-                }
-            })
+        const login = loginUser(email,password)
+        console.log("login",login)
     };
 
     const onForgotPassword = () => {

@@ -10,8 +10,18 @@ import RectangleAdress from '../../components/RectangleAdress';
 import BuyButton from '../../components/BuyButton';
 import RectangleRating from '../../components/RectangleRating';
 
-const ProductDetails = (props) => {
+const ProductDetails = ({ route, navigation }) => {
+
+  const [product, setProduct] = useState(route.params?.Item);
   const [showModal, setShowModal] = useState(false);
+
+  const [id, setId] = useState(product._id);
+  const [name, setName] = useState(product.name);
+  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price);
+  const [details, setDetails] = useState(product.details);
+  const [web, setWeb] = useState(product.web);
+  
 
   const isLogged = () => {
     // TODO: Check user
@@ -44,7 +54,7 @@ const ProductDetails = (props) => {
       </View>
 
       <View style={styles.description}>
-        <TextH2 text="aliqua do voluptate. Sint tempor voluptate ea veniam nisi enim nisi velit anim pariatur amet." />
+        <TextH2 text={description} />
       </View>
       <View style={styles.adress}>
         <RectangleAdress />

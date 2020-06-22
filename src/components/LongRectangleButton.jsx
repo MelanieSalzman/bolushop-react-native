@@ -6,7 +6,7 @@ const LongRectangleButton = (props) => {
   return (
 
     <View style={styles.container}>
-      <TouchableOpacity onPress={props.onPress}>
+      <TouchableOpacity onPress={() => {props.navigation.navigate('ProductList');}}>
         <TextH2 text={props.text} />
       </TouchableOpacity>
     </View>

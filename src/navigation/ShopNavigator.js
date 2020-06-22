@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   createStackNavigator,
 } from '@react-navigation/stack';
@@ -24,7 +24,9 @@ import ForgotPasswordScreen from '../screens/auth/ForgotPasswordScreen';
 import MyProducts from '../screens/venta/MyProducts';
 import MyAccount from '../screens/user/MyAccount';
 import AddProductScreen from '../screens/venta/AddProductScreen';
+import UpdateProductScreen from '../screens/venta/UpdateProductScreen';
 import UserInfoDrawer from '../components/drawer/UserInfoDrawer';
+import { nameMenu } from '../api/userAPI'
 
 // import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -71,6 +73,11 @@ export const HomeNavigator = () => (
       component={AddProductScreen}
     />
 
+    <HomeStackNavigator.Screen
+      name="UpdateProduct"
+      component={UpdateProductScreen}
+    />
+
   </HomeStackNavigator.Navigator>
 );
 
@@ -84,72 +91,83 @@ export const MyAccountNavigator = () => (
 );
 
 const HomeDrawerNavigator = createDrawerNavigator();
-export const HomeDrawer = () => (
-  <HomeDrawerNavigator.Navigator
-    drawerContent={(props) => (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <SafeAreaView forceInset={{ flex: 1 }}>
-          <UserInfoDrawer />
-          <DrawerItemList {...props} />
-        </SafeAreaView>
-      </View>
-    )}
-  >
+export const HomeDrawer = () => {
 
-    <HomeDrawerNavigator.Screen
-      name="Inicio"
-      component={HomeNavigator}
-      options={{
-        drawerIcon: (props) => (
-          <MaterialIcons
-            name="home"
-            size={23}
-            color={props.color}
-          />
-        ),
-      }}
-    />
+  /*const [name, setName] = useState('');
+  
+  useEffect( async () => {
 
-    <HomeDrawerNavigator.Screen
-      name="Buscar"
-      component={HomeNavigator}
-      options={{
-        drawerIcon: (props) => (
-          <MaterialIcons
-            name="search"
-            size={23}
-            color={props.color}
-          />
-        ),
-      }}
-    />
+    const nameUser = nameMenu()
+    setName(nameUser)
+}, [])*/
 
-    <HomeDrawerNavigator.Screen
-      name="Mi cuenta"
-      component={MyAccountNavigator}
-      options={{
-        drawerIcon: (props) => (
-          <MaterialIcons
-            name="face"
-            size={23}
-            color={props.color}
-          />
-        ),
-      }}
-    />
+  return (
+    <HomeDrawerNavigator.Navigator
+      drawerContent={(props) => (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <SafeAreaView forceInset={{ flex: 1 }}>
+            <UserInfoDrawer />
+            <DrawerItemList {...props} />
+          </SafeAreaView>
+        </View>
+      )}
+    >
 
-    <HomeDrawerNavigator.Screen
-      name="Vender"
-      component={HomeNavigator}
-      options={{
-        drawerIcon: (props) => (
-          <MaterialIcons
-            name="store"
-            size={23}
-            color={props.color}
-          />
-        ),
-      }}
-    />
-  </HomeDrawerNavigator.Navigator>
-);
+      <HomeDrawerNavigator.Screen
+        name="Inicio"
+        component={HomeNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <MaterialIcons
+              name="home"
+              size={23}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+
+      <HomeDrawerNavigator.Screen
+        name="Buscar"
+        component={HomeNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <MaterialIcons
+              name="search"
+              size={23}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+
+      <HomeDrawerNavigator.Screen
+        name="Mi cuenta"
+        component={MyAccountNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <MaterialIcons
+              name="face"
+              size={23}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+
+      <HomeDrawerNavigator.Screen
+        name="Vender"
+        component={HomeNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <MaterialIcons
+              name="store"
+              size={23}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+    </HomeDrawerNavigator.Navigator>
+  )
+};
