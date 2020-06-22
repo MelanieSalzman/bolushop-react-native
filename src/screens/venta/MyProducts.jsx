@@ -7,60 +7,12 @@ import { Text, View } from 'native-base';
 import MyProductItem from '../../components/MyProductItem';
 import TextH1 from '../../components/TextH1';
 import colors from '../../constants/colors';
-import { getProductsSeller } from '../../api/productAPI'
+import { getProductsSeller, deleteProduct } from '../../api/productAPI'
 
 
 const MyProducts = (props) => {
-  // Array de productos de ejemplo
-  /* const arrayProducts = [
-     {
-       id: 1,
-       name: 'Taza porta galletitas',
-       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-       cost: '19.99',
-       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-       url: 'www.lamagiadelastazasxd.com.ar/altataza',
-     },
- 
-     {
-       id: 2,
-       name: 'Taza porta galletitas 2',
-       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-       cost: '19.99',
-       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-       url: 'www.lamagiadelastazasxd.com.ar/altataza',
-     },
- 
-     {
-       id: 3,
-       name: 'Taza porta galletitas 2',
-       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-       cost: '19.99',
-       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-       url: 'www.lamagiadelastazasxd.com.ar/altataza',
-     },
- 
-     {
-       id: 4,
-       name: 'Taza porta galletitas 2',
-       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-       cost: '19.99',
-       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-       url: 'www.lamagiadelastazasxd.com.ar/altataza',
-     },
- 
-     {
-       id: 5,
-       name: 'Taza porta galletitas 2',
-       description: 'Es una taza que tiene un contenedor extra para sostener las galletitas',
-       cost: '19.99',
-       details: 'Es una taza que tiene un contenedor extra para sostener las galletitas asdasdasdasd asdasdadsadasdasdasdasasdddddddddddddddddddddddddsdaadsasa',
-       url: 'www.lamagiadelastazasxd.com.ar/altataza',
-     },
- 
-   ];
- */
-  // Representa el array de productos
+
+
   const [products, setProducts] = useState('');
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
@@ -81,8 +33,10 @@ const MyProducts = (props) => {
 
 
   const deleteItem = () => {
+
+    const deleted = deleteProduct(itemToDelete)
     setProducts(
-      arrayProducts.filter((item) => item.id !== itemToDelete),
+      products.filter((item) => item._id !== itemToDelete),
     );
     setIsDeleteModalVisible(false);
   };
@@ -90,6 +44,7 @@ const MyProducts = (props) => {
   const onItemRemovePress = (itemId) => {
     setIsDeleteModalVisible(true);
     setItemToDelete(itemId);
+
   };
 
   const onItemEditPress = (item) => {
@@ -97,7 +52,7 @@ const MyProducts = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} >
 
       <FlatList
         style={styles.title}
@@ -117,7 +72,7 @@ const MyProducts = (props) => {
         </View>
       </TouchableOpacity>
 
-      <Modal visible={isDeleteModalVisible} transparent>
+      <Modal visible={isDeleteModalVisible} transparent >
         <View style={styles.modalBackground}>
           <View style={styles.modalCard}>
             <Text>¿Seguro queres eliminar este producto?</Text>
@@ -132,15 +87,15 @@ const MyProducts = (props) => {
           </View>
         </View>
       </Modal>
-    </SafeAreaView>
+    </SafeAreaView >
+
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.defaultBackground,
-
+    backgroundColor: colors.defaultBackground
   },
   title: {
     marginTop: 20,
@@ -174,3 +129,6 @@ const styles = StyleSheet.create({
 });
 
 export default MyProducts;
+
+
+

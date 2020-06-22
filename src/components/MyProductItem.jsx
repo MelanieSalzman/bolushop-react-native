@@ -32,10 +32,10 @@ const MyProductItem = (props) => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionOption} onPress={() => onItemRemovePress(item._id)}>
               <MaterialIcons name="delete" size={23} />
-            </TouchableOpacity>
+            </TouchableOpacity>{/*
             <TouchableOpacity style={[styles.actionOption, { marginRight: 30 }]}>
               <MaterialIcons name="visibility" size={23} />
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
           </View>
         </View>
 

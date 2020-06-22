@@ -80,9 +80,7 @@ export const updateProduct = async (id, name, description,price,details, web) =>
 
 export const getProducts = async () => {
 
-
     try {
-
 
         const res = await fetch('http://10.0.2.2:3000/api/productos', {
             method: "GET",
@@ -124,4 +122,31 @@ export const getProductsSeller = async () => {
 }
 
 
+export const deleteProduct = async (id) => {
 
+   
+    let deleted = false;
+    try {
+        const token = await AsyncStorage.getItem("token")
+
+        const url = 'http://10.0.2.2:3000/api/productos/' + id
+        console.log("esta es la url que llega", url)
+        const res = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token
+            },
+        
+        })
+
+        const data = await res.json()
+        if (data != null) {
+            deleted = true
+        }
+        return deleted
+    }
+    catch (e) {
+        console.log("Error: ", e)
+    }
+}
