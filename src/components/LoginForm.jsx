@@ -7,7 +7,7 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    CheckBox
+    CheckBox,
 } from 'react-native';
 import colors from '../constants/colors';
 import {loginUser} from '../api/userAPI'

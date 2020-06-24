@@ -2,16 +2,13 @@ import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 
 const SimpleButton = (props) => {
-  const { screen } = props;
   return (
 
     <View style={styles.container}>
       <Button
         color="#13BE6D"
         title={props.title}
-        onPress={() => {
-          props.navigation.navigate(screen);
-        }}
+        onPress={props.onPress}
       />
     </View>
 
