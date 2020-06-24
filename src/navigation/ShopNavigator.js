@@ -19,10 +19,11 @@ import HomeScreen, {
   HomeNavOptions,
 } from '../screens/compra/HomeScreen';
 import ProductDetails from '../screens/compra/ProductDetails';
-import ProductList from '../screens/compra/ProductList';
+import ProductList, {ProductListOptions} from '../screens/compra/ProductList';
 import ForgotPasswordScreen from '../screens/auth/ForgotPasswordScreen';
 import MyProducts from '../screens/venta/MyProducts';
 import MyAccount from '../screens/user/MyAccount';
+import ChangePassword from '../screens/user/ChangePassword';
 import AddProductScreen from '../screens/venta/AddProductScreen';
 import UpdateProductScreen from '../screens/venta/UpdateProductScreen';
 import UserInfoDrawer from '../components/drawer/UserInfoDrawer';
@@ -56,6 +57,8 @@ export const HomeNavigator = () => (
     <HomeStackNavigator.Screen
       name="ProductList"
       component={ProductList}
+      options={ProductListOptions}
+      
     />
 
     <HomeStackNavigator.Screen
@@ -86,6 +89,11 @@ export const MyAccountNavigator = () => (
     <HomeStackNavigator.Screen
       name="MyAccount"
       component={MyAccount}
+    />
+
+    <HomeStackNavigator.Screen
+      name="ChangePassword"
+      component={ChangePassword}
     />
   </HomeStackNavigator.Navigator>
 );

@@ -1,60 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, View, Image, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx';
 import TextH1 from '../../components/TextH1.jsx';
 import colors from '../../constants/colors.js';
 import { getProducts } from '../../api/productAPI'
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 const ProductList = (props) => {
-
-
-
-
-
-  // Array de productos de ejemplo
-  /* const arrayProducts = [
-     {
-       id: 1,
-       name: 'Producto 1',
-       description: 'Descripcion producto 1',
-       cost: '100',
-     },
- 
-     {
-       id: 2,
-       name: 'Producto 2',
-       description: 'Descripcion producto 2',
-       cost: '100',
-     },
-     {
-       id: 3,
-       name: 'Producto 3',
-       description: 'Descripcion producto 3',
-       cost: '100',
-     },
-     {
-       id: 4,
-       name: 'Producto 4',
-       description: 'Descripcion producto 4',
-       cost: '100',
-     },
-     {
-       id: 5,
-       name: 'Producto 5',
-       description: 'Descripcion producto 5',
-       cost: '100',
-     },
-     {
-       id: 6,
-       name: 'Producto 6',
-       description: 'Descripcion producto 6',
-       cost: '100',
-     },
-   ];
- */
-  // Representa el array de productos
 
   const [products, setProducts] = useState('');
   useEffect(
@@ -73,7 +27,6 @@ const ProductList = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <TextH1 text="Todos los productos de bolushop" />
 
       <FlatList
@@ -92,6 +45,40 @@ const ProductList = (props) => {
   );
 };
 
+export const ProductListOptions = (props) => ({
+  //headerTitle: 'Bolushop',
+  headerStyle: {
+    backgroundColor: colors.passwordInputBorder,
+  },
+  headerRight: () => (
+    <View style={styles.headerImageContainer}>
+      <Image style={styles.headerImage} source={require('../../../assets/images/caritaFelizHeader.png')} />
+    </View>
+  ),
+
+  headerTitle: () => (
+    <TextInput
+    placeholder='Enter text...'
+    placeholderTextColor='gray'
+    //value={this.state.query}
+   // onChangeText={this.filterItem.bind(this)}
+    style={styles.input}
+  />
+
+  ),
+
+  headerLeft: () => (
+    <MaterialIcons
+      style={styles.menu}
+      name="menu"
+      size={30}
+      onPress={() => props.navigation.toggleDrawer()}
+    />
+      
+    
+  ),
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -99,7 +86,27 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
+  }, menu: {
+    marginLeft: 20,
   },
+  headerImageContainer: {
+    justifyContent: 'center',
+    marginRight: 20,
+  },
+  headerImage: {
+    height: 40,
+    width: 40,
+  },
+  input:{
+    height:30,
+    width: '95%',
+    backgroundColor:'#fff',
+    borderRadius:20,
+    padding: 5,
+    paddingLeft:10,
+    
+
+  }
 
 });
 

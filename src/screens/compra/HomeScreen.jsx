@@ -21,8 +21,8 @@ const HomeScreen = (props) => {
 
       const setterProducts = async () => {
         const data = await getProducts()
-        setProduct1(data[1])
-        setProduct2(data[2])
+        setProduct1(data[7])
+        setProduct2(data[8])
 
         console.log("la data que me trae en useEffect", data)
       }

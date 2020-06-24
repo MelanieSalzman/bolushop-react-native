@@ -9,12 +9,13 @@ import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import { profileUser } from '../../api/userAPI'
 import LogoutButton from '../../components/LogoutButton.jsx';
+import { updateUser } from '../../api/userAPI';
+
 
 const MyAccount = (props) => {
 
     const [enableWritingUsername, setEnableWritingUsername] = useState(false);
     const [enableWritingEmail, setEnableWritingEmail] = useState(false);
-    const [enableWritingPassword, setEnableWritingPassword] = useState(false);
     const [enableWritingName, setEnableWritingName] = useState(false);
     const [enableWritingSurname, setEnableWritingSurname] = useState(false);
     const [enableWritingWeb, setEnableWritingWeb] = useState(false);
@@ -23,27 +24,14 @@ const MyAccount = (props) => {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-/*
-    const EnableFunction = (component, set) => {
-        if (component) {
-            set(false)
 
-        } else {
-            set(true)
-
-        }
-    }*/
+    const [isLoading, setLoading] = useState(false);
 
     const onChangeTextEmail = (text) => {
         setEmail(text)
     }
     const onChangeTextUsername = (text) => {
         setUsername(text)
-    }
-
-    const onChangeTextPassword = (text) => {
-        setPassword(text)
     }
 
 
@@ -53,13 +41,25 @@ const MyAccount = (props) => {
         console.log("paso por aca")
     }
 
+    const saveProfile = () => {
+     
+        //setLoading(true);
+    
+        const updated = updateUser(email,username)
+    
+       /* setTimeout(() => {
+          navigation.goBack();
+        }, 2000);*/
+      };
+    
+    
+
     useEffect(() => {
 
         const setterProfile = async () => {
             const data = await profileUser()
             setEmail(data.email)
             setUsername(data.username)
-            setPassword(data.password)
             console.log("la data que me trae en useEffect", data)
         }
         setterProfile()
@@ -85,18 +85,11 @@ const MyAccount = (props) => {
                         onPress={() => setEnableWritingUsername(!enableWritingUsername)} />
                     <Line />
                     <InputProfile
-                        name='Correo electronico' 
+                        name='Correo electronico'
                         value={email}
                         edit={enableWritingEmail}
                         onChangeText={onChangeTextEmail}
                         onPress={() => setEnableWritingEmail(!enableWritingEmail)} />
-                    <Line />
-                    <InputProfile
-                        name='Contraseña'
-                        value={password}
-                        edit={enableWritingPassword}
-                        onChangeText={onChangeTextPassword}
-                        onPress={() => setEnableWritingPassword(!enableWritingPassword)} />
                     <Line />
                 </View>
                 <View style={styles.title}>
@@ -123,7 +116,8 @@ const MyAccount = (props) => {
                         onPress={(e) => EnableFunction(enableWritingWeb, setEnableWritingWeb)} />
                     <Line />
                     <InputProfile
-                        name='Fecha de nacimiento'
+
+                        name='Fecha de nacimiento'                        
                         value='28 - 03 - 1997'
                         edit={enableWritingBirth}
                         onPress={(e) => EnableFunction(enableWritingBirth, setEnableWritingBirth)} />
@@ -137,8 +131,9 @@ const MyAccount = (props) => {
                 </View>
 
                 <View style={styles.buttons}>
-                    <SimpleButton title='Cancelar' navigation={props.navigation} screen="HomeScreen" />
-                    <SimpleButton title='Guardar' navigation={props.navigation} screen="MyAccount" />
+                    <SimpleButton title='Cambiar Contraseña' screen="ChangePassword" />
+                    <SimpleButton title='Cancelar'screen="HomeScreen" />
+                    <SimpleButton title='Guardar' onPress={saveProfile} screen="MyAccount" />
                 </View>
                 <View style={styles.button}>
                     <LogoutButton onPress={logout} text="Cerrar sesion" />
@@ -148,6 +143,7 @@ const MyAccount = (props) => {
         </SafeAreaView>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -159,6 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 20
     },
     form: {
         flex: 1,

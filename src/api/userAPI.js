@@ -85,6 +85,31 @@ export const loginUser = async (email, password) => {
     }
 }
 
+export const updateUser = async (email,username) => {
+
+    const token = await AsyncStorage.getItem("token")
+    console.log("paso por aca updateUser")
+    const res = await fetch("http://10.0.2.2:3000/api/users/update", {
+        method: "PUT",
+        headers: {
+            'Authorization': "Bearer " + token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": email,
+            "username": username
+        })
+    })
+    const data = await res.json()
+
+    return data;
+
+}
+
+export const changePass = async (password,newPassword) => {
+
+}
+
 export const nameMenu = async () => {
 
     const token = await AsyncStorage.getItem("token")
