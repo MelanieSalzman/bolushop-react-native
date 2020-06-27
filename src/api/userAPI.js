@@ -78,18 +78,19 @@ export const loginUser = async (email, password) => {
     }
 }
 
-export const updateUser = async (email,username) => {
+export const updateUser = async (email,username, name) => {
 
     const token = await AsyncStorage.getItem("token")
     const res = await fetch("http://10.0.2.2:3000/api/users/update", {
-        method: "PUT",
+        method: "POST",
         headers: {
             'Authorization': "Bearer " + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             "email": email,
-            "username": username
+            "username": username,
+            "name": name
         })
     })
     const data = await res.json()
@@ -99,6 +100,22 @@ export const updateUser = async (email,username) => {
 }
 
 export const changePass = async (password,newPassword) => {
+
+    const token = await AsyncStorage.getItem("token")
+    const res = await fetch("http://10.0.2.2:3000/api/auth/changepassword", {
+        method: "PUT",
+        headers: {
+            'Authorization': "Bearer " + token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "password": password,
+            "newPassword": newPassword
+        })
+    })
+    const data = await res.json()
+
+    return data;
 
 }
 
