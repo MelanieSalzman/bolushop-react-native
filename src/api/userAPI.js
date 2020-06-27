@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const registerUser = async (email, password, username) => {
+export const registerUser = async (name, username, email, password) => {
 
     try {
         let register = false;
@@ -11,24 +11,20 @@ export const registerUser = async (email, password, username) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                "name": name,
                 "email": email,
                 "password": password,
                 "username": username
             })
         })
-        console.log("esta es la respuesta", response)
 
         const data = await response.json()
-
-        console.log("la data es ", data)
-        console.log("el token es ", data.token)
 
         await AsyncStorage.setItem('token', data.token)
         if (data.token != null) {
             register = true
         }
 
-        console.log("el registro es", register)
         return register;
     }
     catch (e) {
@@ -45,11 +41,8 @@ export const profileUser = async () => {
             Authorization: "Bearer " + token
         })
     })
-    console.log("esta es la res", res)
+
     const data = await res.json()
-    console.log("la data que me trae profile es:", data)
-    console.log("la data que me trae profile es:", data.email)
-    console.log("la data que me trae profile es:", data.password)
 
     return data;
 
@@ -88,7 +81,6 @@ export const loginUser = async (email, password) => {
 export const updateUser = async (email,username) => {
 
     const token = await AsyncStorage.getItem("token")
-    console.log("paso por aca updateUser")
     const res = await fetch("http://10.0.2.2:3000/api/users/update", {
         method: "PUT",
         headers: {

@@ -27,7 +27,7 @@ const RegisterForm = (props) => {
     const onRegisterPress = () => {
         props.onRegisterPress();
 
-        registerUser(email, password, username)
+        registerUser(name, username, email, password)
 
     };
 

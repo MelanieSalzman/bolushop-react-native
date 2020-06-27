@@ -146,7 +146,7 @@ export const HomeDrawer = () => {
 
       <HomeDrawerNavigator.Screen
         name="Buscar"
-        component={HomeNavigator}
+        component={ProductList}
         options={{
           drawerIcon: (props) => (
             <MaterialIcons
