@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'
@@ -24,6 +24,7 @@ const MyAccount = (props) => {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [name,setName] = useState('')
 
     const [isLoading, setLoading] = useState(false);
 
@@ -34,6 +35,9 @@ const MyAccount = (props) => {
         setUsername(text)
     }
 
+    const onChangeTextName = (text) => {
+        setName(text)
+    }
 
     const logout = async () => {
         await AsyncStorage.removeItem("token")
@@ -42,17 +46,21 @@ const MyAccount = (props) => {
     }
 
     const saveProfile = () => {
-     
+
         //setLoading(true);
-    
-        const updated = updateUser(email,username)
-    
-       /* setTimeout(() => {
-          navigation.goBack();
-        }, 2000);*/
-      };
-    
-    
+
+        const updated = updateUser(email, username, name)
+
+        /* setTimeout(() => {
+           navigation.goBack();
+         }, 2000);*/
+    };
+
+    const ChangePassword = () => {
+        props.navigation.navigate("ChangePassword")
+    }
+
+
 
     useEffect(() => {
 
@@ -60,7 +68,8 @@ const MyAccount = (props) => {
             const data = await profileUser()
             setEmail(data.email)
             setUsername(data.username)
-            console.log("la data que me trae en useEffect", data)
+            setName(data.name)
+
         }
         setterProfile()
     }, [])
@@ -99,42 +108,45 @@ const MyAccount = (props) => {
                     <Line />
                     <InputProfile
                         name='Nombre'
-                        value='Melanie'
+                        value={name}
                         edit={enableWritingName}
-                        onPress={(e) => EnableFunction(enableWritingName, setEnableWritingName)} />
-                    <Line />
-                    <InputProfile
-                        name='Apellido'
-                        value='Salzman'
-                        edit={enableWritingSurname}
-                        onPress={(e) => EnableFunction(enableWritingSurname, setEnableWritingSurname)} />
+                        onChangeText={onChangeTextName}
+                        onPress={() => setEnableWritingName(!enableWritingName)} />
                     <Line />
                     <InputProfile
                         name='Pagina web'
-                        value='www.melanielamejor.com.ar'
+                        value=''
                         edit={enableWritingWeb}
                         onPress={(e) => EnableFunction(enableWritingWeb, setEnableWritingWeb)} />
                     <Line />
                     <InputProfile
 
-                        name='Fecha de nacimiento'                        
-                        value='28 - 03 - 1997'
+                        name='Fecha de nacimiento'
+                        value=''
                         edit={enableWritingBirth}
                         onPress={(e) => EnableFunction(enableWritingBirth, setEnableWritingBirth)} />
                     <Line />
                     <InputProfile
                         name='Telefono'
-                        value='11 - 5145 - 4719'
+                        value=''
                         edit={enableWritingPhone}
                         onPress={(e) => EnableFunction(enableWritingPhone, setEnableWritingPhone)} />
                     <Line />
                 </View>
 
-                <View style={styles.buttons}>
-                    <SimpleButton title='Cambiar Contraseña' screen="ChangePassword" />
-                    <SimpleButton title='Cancelar'screen="HomeScreen" />
-                    <SimpleButton title='Guardar' onPress={saveProfile} screen="MyAccount" />
+                <View style={styles.actionsContainer}>
+                    <TouchableOpacity onPress={saveProfile}>
+                        <View style={styles.loginButtonContainer}>
+                            <Text>Guardar</Text>
+                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={ChangePassword}>
+                        <View style={styles.loginButtonContainer}>
+                            <Text>Cambiar contraseña</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
+
                 <View style={styles.button}>
                     <LogoutButton onPress={logout} text="Cerrar sesion" />
                 </View>
@@ -182,6 +194,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
     },
+    actionsContainer: {
+        marginTop: 45,
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    loginButtonContainer: {
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 40,
+        borderRadius: 20,
+        paddingHorizontal: 40,
+        backgroundColor: '#4EEE98',
+    }
 });
 
 export default MyAccount;
