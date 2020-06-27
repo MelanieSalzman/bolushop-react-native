@@ -9,6 +9,7 @@ import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import { profileUser } from '../../api/userAPI'
 import LogoutButton from '../../components/LogoutButton.jsx';
+import { changePass } from '../../api/userAPI'
 
 const MyAccount = (props) => {
 
@@ -30,13 +31,13 @@ const MyAccount = (props) => {
 
     const onSavePress = () => {
      
-        setLoading(true);
+        //setLoading(true);
     
         const changed = changePass(password,newPassword)
     
-        setTimeout(() => {
+       /* setTimeout(() => {
           navigation.goBack();
-        }, 2000);
+        }, 2000);*/
       };
     
 
