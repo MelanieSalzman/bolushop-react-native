@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, View, Image, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import ProductItem from '../../components/ProductItem.jsx';
+import LoadingOverlay from '../../components/LoadingOverlay'
 import TextH1 from '../../components/TextH1.jsx';
 import colors from '../../constants/colors.js';
 import { getProducts } from '../../api/productAPI'
@@ -11,13 +12,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 const ProductList = (props) => {
 
   const [products, setProducts] = useState('');
+  const [isLoading, setLoading] = useState(false);
+
   useEffect(
 
     () => {
 
       const list = async () => {
+        setLoading(true);
         const data = await getProducts()
         setProducts(data)
+        setLoading(false);
       }
 
       list()
@@ -27,6 +32,7 @@ const ProductList = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LoadingOverlay visible={isLoading} />
       <TextH1 text="Todos los productos de bolushop" />
 
       <FlatList

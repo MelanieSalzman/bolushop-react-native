@@ -20,7 +20,6 @@ const HomeScreen = (props) => {
   useEffect(
 
     () => {
-
       
       const setterProducts = async () => {
         setLoading(true)

@@ -10,7 +10,8 @@ import {
     CheckBox,
     Alert,
 } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+//import DatePicker from 'react-native-datepicker';
+import Calendar from '../components/Calendar'
 import colors from '../constants/colors';
 import { registerUser } from '../api/userAPI'
 
@@ -55,14 +56,15 @@ const RegisterForm = (props) => {
                     value={username}
                     onChangeText={(username) => setUsername(username)}
                 />
-
+   { /*
                 <DatePicker
                     format="DD/MM/YYYY"
                     style={styles.dateComponent}
                     date={birth}
                     onDateChange={changeDate}
 
-                />
+                />*/}
+                <Calendar />
 
                 <TextInput
                     style={styles.inputStyleRegister}
