@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Title from '../../components/TextH1';
 import ProductItem from '../../components/ProductItem';
 import RectangleButton from '../../components/LongRectangleButton';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import Banner from '../../components/Banner';
 import colors from '../../constants/colors';
 import { getProducts } from '../../api/productAPI'
@@ -13,18 +14,21 @@ const HomeScreen = (props) => {
 
   const [product1, setProduct1] = useState('');
   const [product2, setProduct2] = useState('');
+  const [isLoading, setLoading] = useState(false);
 
 
   useEffect(
 
     () => {
 
+      
       const setterProducts = async () => {
+        setLoading(true)
         const data = await getProducts()
         setProduct1(data[7])
         setProduct2(data[8])
 
-        console.log("la data que me trae en useEffect", data)
+        setLoading(false)
       }
       setterProducts()
     }
@@ -32,6 +36,7 @@ const HomeScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      <LoadingOverlay visible={isLoading} />
 
       <Title style={{ flex: 1, alignItems: 'flex-start' }} text="Candidatos a BoluPremio del año" />
 
