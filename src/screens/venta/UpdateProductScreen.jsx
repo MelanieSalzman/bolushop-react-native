@@ -26,9 +26,7 @@ const UpdateProductScreen = ({ route, navigation }) => {
     const added = updateProduct(id, name, description, price, details, web)
     console.log('esto es added', added)
 
-    setTimeout(() => {
-      navigation.goBack();
-    }, 2000);
+    navigation.navigate('MyProducts')
   };
 
 

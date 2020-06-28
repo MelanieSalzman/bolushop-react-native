@@ -17,6 +17,7 @@ const MyProducts = (props) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
 
+
   useEffect(
     () => {
 
@@ -29,7 +30,6 @@ const MyProducts = (props) => {
       setterMyProducts()
     }
     , [])
-
 
 
   const deleteItem = () => {
@@ -64,6 +64,7 @@ const MyProducts = (props) => {
             onItemRemovePress={onItemRemovePress}
           />
         )}
+        extraData={products}
         keyExtractor={(item) => item._id.toString()}
       />
       <TouchableOpacity onPress={() => props.navigation.navigate('AddProduct')}>

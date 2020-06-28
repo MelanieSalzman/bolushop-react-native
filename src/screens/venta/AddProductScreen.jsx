@@ -8,7 +8,7 @@ import  { addProduct } from '../../api/productAPI'
 
 
 
-const AddProductScreen = ({ route, navigation }) => {
+const AddProductScreen = ({ route, navigation }, props) => {
   const [product, setProduct] = useState(route.params?.editItem); // Item {} - undefined
   const [isLoading, setLoading] = useState(false);
   const [name, setName] = useState('');
@@ -24,10 +24,9 @@ const AddProductScreen = ({ route, navigation }) => {
 
     const added = addProduct(name,price,description,details,web)
     console.log('esto es added', added)
-
-    setTimeout(() => {
-      navigation.goBack();
-    }, 2000);
+    const item = {name: name, description: description, price: price, details: details, web: web}
+    
+    navigation.navigate('MyProducts');
   };
 
 
