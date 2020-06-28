@@ -1,5 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
+const urlAndroidEmulator = '10.0.2.2:3000'
+const urlNoxEmulator = '172.17.100.2:3000'
+
 export const addProduct = async (name, price, description, details, web) => {
 
     console.log("esto es el nombre que llega a addProduct", name)
@@ -11,7 +14,7 @@ export const addProduct = async (name, price, description, details, web) => {
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const res = await fetch('http://10.0.2.2:3000/api/productos', {
+        const res = await fetch(`http://${urlNoxEmulator}/api/productos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +52,7 @@ export const updateProduct = async (id, name, description,price,details, web) =>
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const url = 'http://10.0.2.2:3000/api/productos/' + id
+        const url = `http://${urlNoxEmulator}/api/productos/` + id
         console.log('esta es la url',url)
         const res = await fetch(url, {
             method: "PUT",
@@ -82,7 +85,7 @@ export const getProducts = async () => {
 
     try {
 
-        const res = await fetch('http://10.0.2.2:3000/api/productos', {
+        const res = await fetch(`http://${urlNoxEmulator}/api/productos`, {
             method: "GET",
 
         })
@@ -104,7 +107,7 @@ export const getProductsSeller = async () => {
     try {
 
         const token = await AsyncStorage.getItem("token")
-        const res = await fetch('http://10.0.2.2:3000/api/productos/myProducts', {
+        const res = await fetch(`http://${urlNoxEmulator}/api/productos/myProducts`, {
             method: "GET",
             headers: new Headers({
                 Authorization: "Bearer " + token
@@ -129,7 +132,7 @@ export const deleteProduct = async (id) => {
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const url = 'http://10.0.2.2:3000/api/productos/' + id
+        const url = `http://${urlNoxEmulator}/api/productos/` + id
         console.log("esta es la url que llega", url)
         const res = await fetch(url, {
             method: "DELETE",
