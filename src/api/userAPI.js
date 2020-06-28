@@ -1,11 +1,14 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
+const urlAndroidEmulator = '10.0.2.2:3000'
+const urlNoxEmulator = '172.17.100.2:3000'
+
 export const registerUser = async (name, username, email, password) => {
 
     try {
         let register = false;
 
-        const response = await fetch("http://10.0.2.2:3000/api/auth/register", {
+        const response = await fetch(`http://${urlNoxEmulator}/api/auth/register`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -36,7 +39,7 @@ export const profileUser = async () => {
 
     const token = await AsyncStorage.getItem("token")
 
-    const res = await fetch('http://10.0.2.2:3000/api/auth/profile', {
+    const res = await fetch(`http://${urlNoxEmulator}/api/auth/profile`, {
         headers: new Headers({
             Authorization: "Bearer " + token
         })
@@ -52,7 +55,7 @@ export const loginUser = async (email, password) => {
 
     let login = false
     try {
-        const res = await fetch("http://10.0.2.2:3000/api/auth/login", {
+        const res = await fetch(`http://${urlNoxEmulator}/api/auth/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +84,7 @@ export const loginUser = async (email, password) => {
 export const updateUser = async (email,username, name) => {
 
     const token = await AsyncStorage.getItem("token")
-    const res = await fetch("http://10.0.2.2:3000/api/users/update", {
+    const res = await fetch(`http://${urlNoxEmulator}/api/users/update`, {
         method: "POST",
         headers: {
             'Authorization': "Bearer " + token,
@@ -102,7 +105,7 @@ export const updateUser = async (email,username, name) => {
 export const changePass = async (password,newPassword) => {
 
     const token = await AsyncStorage.getItem("token")
-    const res = await fetch("http://10.0.2.2:3000/api/auth/changepassword", {
+    const res = await fetch(`http://${urlNoxEmulator}/api/auth/changepassword`, {
         method: "PUT",
         headers: {
             'Authorization': "Bearer " + token,
@@ -123,7 +126,7 @@ export const nameMenu = async () => {
 
     const token = await AsyncStorage.getItem("token")
 
-    const res = await fetch('http://10.0.2.2:3000/api/auth/profile', {
+    const res = await fetch(`http://${urlNoxEmulator}/api/auth/profile`, {
         headers: new Headers({
             Authorization: "Bearer " + token
         })
