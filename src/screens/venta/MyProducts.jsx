@@ -5,6 +5,7 @@ import {
 import Constants from 'expo-constants';
 import { Text, View } from 'native-base';
 import MyProductItem from '../../components/MyProductItem';
+import LoadingOverlay from '../../components/LoadingOverlay'
 import TextH1 from '../../components/TextH1';
 import colors from '../../constants/colors';
 import { getProductsSeller, deleteProduct } from '../../api/productAPI'
@@ -16,16 +17,16 @@ const MyProducts = (props) => {
   const [products, setProducts] = useState('');
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
+  const [isLoading, setLoading] = useState(false);
 
 
   useEffect(
     () => {
-
+      setLoading(true);
       const setterMyProducts = async () => {
         const data = await getProductsSeller()
         setProducts(data)
-
-        console.log("la data que me trae en useEffect", data)
+        setLoading(false)
       }
       setterMyProducts()
     }
@@ -53,7 +54,7 @@ const MyProducts = (props) => {
 
   return (
     <SafeAreaView style={styles.container} >
-
+      <LoadingOverlay visible={isLoading} />
       <FlatList
         style={styles.title}
         data={products}

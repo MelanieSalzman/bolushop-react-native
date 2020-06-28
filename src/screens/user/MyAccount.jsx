@@ -4,6 +4,7 @@ import ProfilePicture from '../../components/ProfilePicture.jsx'
 import TextH2 from '../../components/TextH2.jsx'
 import InputProfile from '../../components/InputProfile.jsx'
 import SimpleButton from '../../components/SimpleButton.jsx'
+import LoadingOverlay from '../../components/LoadingOverlay'
 import Line from '../../components/Line.jsx'
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,7 +25,7 @@ const MyAccount = (props) => {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [name,setName] = useState('')
+    const [name, setName] = useState('')
 
     const [isLoading, setLoading] = useState(false);
 
@@ -47,13 +48,10 @@ const MyAccount = (props) => {
 
     const saveProfile = () => {
 
-        //setLoading(true);
+        setLoading(true);
 
         const updated = updateUser(email, username, name)
-
-        /* setTimeout(() => {
-           navigation.goBack();
-         }, 2000);*/
+        setLoading(false);
     };
 
     const ChangePassword = () => {
@@ -65,10 +63,12 @@ const MyAccount = (props) => {
     useEffect(() => {
 
         const setterProfile = async () => {
+            setLoading(true);
             const data = await profileUser()
             setEmail(data.email)
             setUsername(data.username)
             setName(data.name)
+            setLoading(false);
 
         }
         setterProfile()
@@ -76,6 +76,7 @@ const MyAccount = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <LoadingOverlay visible={isLoading} />
             <ScrollView>
                 <View style={styles.image}>
                     <ProfilePicture />
@@ -139,8 +140,8 @@ const MyAccount = (props) => {
                         <View style={styles.loginButtonContainer}>
                             <Text>Guardar</Text>
                         </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={ChangePassword}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={ChangePassword}>
                         <View style={styles.loginButtonContainer}>
                             <Text>Cambiar contraseña</Text>
                         </View>
