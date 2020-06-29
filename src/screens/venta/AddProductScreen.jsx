@@ -18,14 +18,14 @@ const AddProductScreen = ({ route, navigation }, props) => {
   const [web, setWeb] = useState('');
   
 
-  const onSavePress = () => {
+  const onSavePress = async () => {
     setLoading(true);
    
 
-    const added = addProduct(name,price,description,details,web)
+    const added = await addProduct(name,price,description,details,web)
     console.log('esto es added', added)
     const item = {name: name, description: description, price: price, details: details, web: web}
-    
+    setLoading(false);
     navigation.navigate('MyProducts');
   };
 

@@ -23,14 +23,15 @@ const MyProducts = (props) => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+   //setLoading(true);
     const setterMyProducts = async () => {
       const data = await getProductsSeller();
-      await setProducts(data);
-      setLoading(false);
+      setProducts(data);
+      console.log("paso por aca")
+     // setLoading(false);
     };
     setterMyProducts();
-  }, []);
+  }, [products]);
 
   const deleteItem = () => {
     const deleted = deleteProduct(itemToDelete);
