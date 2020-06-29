@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const urlAndroidEmulator = '10.0.2.2:3000'
 const urlNoxEmulator = '172.17.100.2:3000'
+const urlNgrox = 'f68dda398f68.ngrok.io'
 
 export const addProduct = async (name, price, description, details, web) => {
 
@@ -14,7 +15,7 @@ export const addProduct = async (name, price, description, details, web) => {
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const res = await fetch(`http://${urlNoxEmulator}/api/productos`, {
+        const res = await fetch(`http://${urlNgrox}/api/productos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ export const updateProduct = async (id, name, description,price,details, web) =>
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const url = `http://${urlNoxEmulator}/api/productos/` + id
+        const url = `http://${urlNgrox}/api/productos/` + id
         console.log('esta es la url',url)
         const res = await fetch(url, {
             method: "PUT",
@@ -85,7 +86,7 @@ export const getProducts = async () => {
 
     try {
 
-        const res = await fetch(`http://${urlNoxEmulator}/api/productos`, {
+        const res = await fetch(`http://${urlNgrox}/api/productos`, {
             method: "GET",
 
         })
@@ -107,7 +108,7 @@ export const getProductsSeller = async () => {
     try {
 
         const token = await AsyncStorage.getItem("token")
-        const res = await fetch(`http://${urlNoxEmulator}/api/productos/myProducts`, {
+        const res = await fetch(`http://${urlNgrox}/api/productos/myProducts`, {
             method: "GET",
             headers: new Headers({
                 Authorization: "Bearer " + token
@@ -132,7 +133,7 @@ export const deleteProduct = async (id) => {
     try {
         const token = await AsyncStorage.getItem("token")
 
-        const url = `http://${urlNoxEmulator}/api/productos/` + id
+        const url = `http://${urlNgrox}/api/productos/` + id
         console.log("esta es la url que llega", url)
         const res = await fetch(url, {
             method: "DELETE",
