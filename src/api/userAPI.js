@@ -5,7 +5,7 @@ import Config from 'react-native-config';
 urlNoxEmulator = '172.17.100.2:3000'
 urlNgrox = 'urlngrox'*/
 
-const url = '472b46fd6518.ngrok.io';
+const urlSelected = '472b46fd6518.ngrok.io';
 
 
 export const registerUser = async (name, username, email, password) => {
@@ -13,7 +13,7 @@ export const registerUser = async (name, username, email, password) => {
   try {
     let register = false;
 
-    const response = await fetch(`http://${url}/api/auth/register`, {
+    const response = await fetch(`http://${urlSelected}/api/auth/register`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export const loginUser = async (email, password) => {
 
   let login = false
   try {
-    const res = await fetch(`http://${url}/api/auth/login`, {
+    const res = await fetch(`http://${urlSelected}/api/auth/login`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ export const updateUser = async (email, username, name) => {
   try {
 
     const token = await AsyncStorage.getItem("token")
-    const res = await fetch(`http://${url}/api/users/update`, {
+    const res = await fetch(`http://${urlSelected}/api/users/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export const profileUser = async () => {
 
     return undefined;
   }
-  const res = await fetch(`http://${url}/api/auth/profile`, {
+  const res = await fetch(`http://${urlSelected}/api/auth/profile`, {
     headers: new Headers({
       Authorization: "Bearer " + token,
     }),
@@ -124,7 +124,7 @@ export const profileUser = async () => {
 export const changePass = async (password, newPassword) => {
   const token = await AsyncStorage.getItem("token");
   const res = await fetch(
-    `http://${url}/api/auth/changepassword`,
+    `http://${urlSelected}/api/auth/changepassword`,
     {
       method: "PUT",
       headers: {
@@ -145,7 +145,7 @@ export const changePass = async (password, newPassword) => {
 export const nameMenu = async () => {
   const token = await AsyncStorage.getItem("token");
 
-  const res = await fetch(`http://${url}/api/auth/profile`, {
+  const res = await fetch(`http://${urlSelected}/api/auth/profile`, {
     headers: new Headers({
       Authorization: "Bearer " + token,
     }),

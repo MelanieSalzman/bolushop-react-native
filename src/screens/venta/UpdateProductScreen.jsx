@@ -60,8 +60,7 @@ const UpdateProductScreen = ({ route, navigation }) => {
             maxLength={8}
             placeholder="Precio $"
             keyboardType="numeric"
-            textContentType="name"
-            value={price}
+            value={`${price}`}
             onChangeText={(text) => { setPrice(text) }}
           />
           <TextInput

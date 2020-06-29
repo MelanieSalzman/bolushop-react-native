@@ -60,7 +60,7 @@ const AddProductScreen = ({ route, navigation }, props) => {
             maxLength={8}
             placeholder="Precio $"
             keyboardType="numeric"
-            value={product ? product.cost : price}
+            value={`${price}`}
             onChangeText={(text)=>{setPrice(text)}}
           />
           <TextInput

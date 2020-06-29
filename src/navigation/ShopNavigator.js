@@ -11,7 +11,7 @@ import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
 import ProductDetails, {
   ProductDetailsNavOptions,
 } from "../screens/compra/ProductDetails";
-import ProductList, { ProductListOptions } from "../screens/compra/ProductList";
+import ProductList, { ProductListNavOptions } from "../screens/compra/ProductList";
 import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen";
 import MyProducts, { MyProductsNavOptions } from "../screens/venta/MyProducts";
 import MyAccount, { MyAccountNavOptions } from "../screens/user/MyAccount";
@@ -42,7 +42,7 @@ export const HomeNavigator = () => (
     <HomeStackNavigator.Screen
       name="ProductList"
       component={ProductList}
-      options={ProductListOptions}
+      options={ProductListNavOptions}
     />
 
     <HomeStackNavigator.Screen
@@ -90,6 +90,16 @@ export const SellerNavigator = () => (
   </HomeStackNavigator.Navigator>
 );
 
+export const ProductListNavigator = () => (
+  <HomeStackNavigator.Navigator>
+    <HomeStackNavigator.Screen
+      name="Productos"
+      component={ProductList}
+      options={ProductListNavOptions}
+    />
+  </HomeStackNavigator.Navigator>
+);
+
 const HomeDrawerNavigator = createDrawerNavigator();
 export const HomeDrawer = () => {
   return (
@@ -108,7 +118,7 @@ export const HomeDrawer = () => {
 
       <HomeDrawerNavigator.Screen
         name="Buscar"
-        component={ProductList}
+        component={ProductListNavigator}
         options={{
           drawerIcon: (props) => (
             <MaterialIcons name="search" size={23} color={props.color} />

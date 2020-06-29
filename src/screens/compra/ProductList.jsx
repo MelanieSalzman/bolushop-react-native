@@ -51,7 +51,7 @@ const ProductList = (props) => {
   );
 };
 
-export const ProductListOptions = (props) => ({
+export const ProductListNavOptions = (props) => ({
   //headerTitle: 'Bolushop',
   headerStyle: {
     backgroundColor: colors.passwordInputBorder,

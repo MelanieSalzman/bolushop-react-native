@@ -26,7 +26,7 @@ const MyProducts = (props) => {
     setLoading(true);
     const setterMyProducts = async () => {
       const data = await getProductsSeller();
-      setProducts(data);
+      await setProducts(data);
       setLoading(false);
     };
     setterMyProducts();
@@ -94,34 +94,6 @@ const MyProducts = (props) => {
     </SafeAreaView>
   );
 };
-export const MyProduct = (props) => ({
-  //headerTitle: 'Bolushop',
-  headerStyle: {
-    backgroundColor: colors.passwordInputBorder,
-  },
-  headerRight: () => (
-    <View style={styles.headerImageContainer}>
-      <Image style={styles.headerImage} source={require('../../../assets/images/caritaFelizHeader.png')} />
-    </View>
-  ),
-
-  headerTitle: () => (
-    <View> 
-  <Text style={styles.defaultText}> Mis productos </Text>
-  </View>
-  ),
-
-  headerLeft: () => (
-    <MaterialIcons
-      style={styles.menu}
-      name="menu"
-      size={30}
-      onPress={() => props.navigation.toggleDrawer()}
-    />
-      
-    
-  ),
-});
 
 export const MyProductsNavOptions = (props) => ({
   headerTitle: "Mis Productos",
