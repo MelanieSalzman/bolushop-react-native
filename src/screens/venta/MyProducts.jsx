@@ -46,6 +46,7 @@ const MyProducts = (props) => {
   const onItemEditPress = (item) => {
     props.navigation.navigate("UpdateProduct", { editItem: item });
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,6 +94,34 @@ const MyProducts = (props) => {
     </SafeAreaView>
   );
 };
+export const MyProduct = (props) => ({
+  //headerTitle: 'Bolushop',
+  headerStyle: {
+    backgroundColor: colors.passwordInputBorder,
+  },
+  headerRight: () => (
+    <View style={styles.headerImageContainer}>
+      <Image style={styles.headerImage} source={require('../../../assets/images/caritaFelizHeader.png')} />
+    </View>
+  ),
+
+  headerTitle: () => (
+    <View> 
+  <Text style={styles.defaultText}> Mis productos </Text>
+  </View>
+  ),
+
+  headerLeft: () => (
+    <MaterialIcons
+      style={styles.menu}
+      name="menu"
+      size={30}
+      onPress={() => props.navigation.toggleDrawer()}
+    />
+      
+    
+  ),
+});
 
 export const MyProductsNavOptions = (props) => ({
   headerTitle: "Mis Productos",

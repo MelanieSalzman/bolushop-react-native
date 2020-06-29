@@ -21,8 +21,8 @@ const HomeScreen = (props) => {
     const setterProducts = async () => {
       setLoading(true);
       const data = await getProducts();
-      setProduct1(data[0]);
-      setProduct2(data[1]);
+     setProduct1(data[7]);
+      setProduct2(data[6]);
 
       setLoading(false);
     };

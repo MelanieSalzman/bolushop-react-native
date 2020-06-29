@@ -1,42 +1,50 @@
 import AsyncStorage from "@react-native-community/async-storage";
+import Config from 'react-native-config';
 
-const urlAndroidEmulator = "10.0.2.2:3000";
-const urlNoxEmulator = "172.17.100.2:3000";
+
+/*urlAndroidEmulator = '10.0.2.2:3000'
+urlNoxEmulator = '172.17.100.2:3000'
+urlNgrox = 'urlngrox'*/
+
+const url = '472b46fd6518.ngrok.io';
 
 export const addProduct = async (name, price, description, details, web) => {
-  console.log("esto es el nombre que llega a addProduct", name);
-  console.log("esto es el price que llega a addProduct", price);
-  console.log("esto es el nombre que llega a addProduct", description);
-  console.log("esto es el nombre que llega a addProduct", details);
-  console.log("esto es el nombre que llega a addProduct", web);
+
+  console.log("esto es el nombre que llega a addProduct", name)
+  console.log("esto es el price que llega a addProduct", price)
+  console.log("esto es el nombre que llega a addProduct", description)
+  console.log("esto es el nombre que llega a addProduct", details)
+  console.log("esto es el nombre que llega a addProduct", web)
   let added = false;
   try {
-    const token = await AsyncStorage.getItem("token");
+    const token = await AsyncStorage.getItem("token")
 
-    const res = await fetch(`http://${urlAndroidEmulator}/api/productos`, {
+    const res = await fetch(`http://${url}/api/productos`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + token
       },
       body: JSON.stringify({
-        name: name,
-        price: price,
-        description: description,
-        details: details,
-        web: web,
-      }),
-    });
+        "name": name,
+        "price": price,
+        "description": description,
+        "details": details,
+        "web": web
+      })
+    })
 
-    const data = await res.json();
+    const data = await res.json()
     if (data != null) {
-      added = true;
+      added = true
     }
-    return added;
-  } catch (e) {
-    console.log("Error: ", e);
+    return added
   }
-};
+  catch (e) {
+    console.log("Error: ", e)
+  }
+}
+
 
 export const updateProduct = async (
   id,
@@ -55,7 +63,7 @@ export const updateProduct = async (
   try {
     const token = await AsyncStorage.getItem("token");
 
-    const url = `http://${urlAndroidEmulator}/api/productos/` + id;
+    const url = `http://${url}/api/productos/` + id;
     console.log("esta es la url", url);
     const res = await fetch(url, {
       method: "PUT",
@@ -84,7 +92,7 @@ export const updateProduct = async (
 
 export const getProducts = async () => {
   try {
-    const res = await fetch(`http://${urlAndroidEmulator}/api/productos`, {
+    const res = await fetch(`http://${url}/api/productos`, {
       method: "GET",
     });
 
@@ -101,7 +109,7 @@ export const getProductsSeller = async () => {
   try {
     const token = await AsyncStorage.getItem("token");
     const res = await fetch(
-      `http://${urlAndroidEmulator}/api/productos/myProducts`,
+      `http://${url}/api/productos/myProducts`,
       {
         method: "GET",
         headers: new Headers({
@@ -122,7 +130,7 @@ export const deleteProduct = async (id) => {
   try {
     const token = await AsyncStorage.getItem("token");
 
-    const url = `http://${urlAndroidEmulator}/api/productos/` + id;
+    const url = `http://${url}/api/productos/` + id;
     console.log("esta es la url que llega", url);
     const res = await fetch(url, {
       method: "DELETE",

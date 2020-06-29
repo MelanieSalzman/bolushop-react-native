@@ -64,7 +64,7 @@ export const ProductListOptions = (props) => ({
 
   headerTitle: () => (
     <TextInput
-    placeholder='Enter text...'
+    placeholder='Enter Text...'
     placeholderTextColor='gray'
     //value={this.state.query}
    // onChangeText={this.filterItem.bind(this)}

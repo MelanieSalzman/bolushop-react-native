@@ -66,6 +66,7 @@ const RegisterForm = (props) => {
                 />*/}
                 <Calendar />
 
+
                 <TextInput
                     style={styles.inputStyleRegister}
                     placeholder="Direccion de correo electronico"
