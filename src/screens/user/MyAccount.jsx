@@ -36,6 +36,7 @@ const MyAccount = (props) => {
   const [name, setName] = useState("");
 
   const [isLoading, setLoading] = useState(false);
+  const [islogout, setIsLogout] = useState(false)
 
   const onChangeTextEmail = (text) => {
     setEmail(text);
@@ -50,6 +51,7 @@ const MyAccount = (props) => {
 
   const logout = async () => {
     await AsyncStorage.removeItem("token");
+    setIsLogout(true)
     props.navigation.navigate("HomeScreen");
     console.log("paso por aca");
   };
@@ -80,7 +82,7 @@ const MyAccount = (props) => {
       setLoading(false);
     };
     setterProfile();
-  }, []);
+  }, [username]);
 
   return (
     <SafeAreaView style={styles.container}>
