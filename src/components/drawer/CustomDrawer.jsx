@@ -13,8 +13,8 @@ import UserInfoDrawer from "./UserInfoDrawer";
 import { profileUser } from "../../api/userAPI";
 
 const CustomDrawer = (props) => {
+  
   const [userName, setUserName] = useState("");
-
 
   useEffect(() => {
     const getUserCall = async () => {
@@ -26,7 +26,7 @@ const CustomDrawer = (props) => {
       console.log("No data");
     };
     getUserCall();
-  }, []);
+  }, [userName]);
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import colors from "../../constants/colors";
+import BuyButton from '../../components/BuyButton'
 const UserInfoDrawer = (props) => (
   <View style={styles.container}>
     <View style={styles.userInfoContainer}>
@@ -8,10 +9,14 @@ const UserInfoDrawer = (props) => (
         source={require("../../images/avatar.png")}
         style={styles.userImage}
       />
-
-      <Text style={styles.userNameText}>
-        {props.userName ? props.userName : "No loggeado :("}
-      </Text>
+      <View style={styles.rightContainer}>
+        <Text style={styles.userNameText}>
+          {props.userName ? `¡Hola ${props.userName}!` : "No loggeado :("}
+        </Text>
+        <View style={styles.loginButton}>
+          <BuyButton text='Ingresar' />
+        </View>
+      </View>
     </View>
   </View>
 );
@@ -35,9 +40,19 @@ const styles = StyleSheet.create({
   },
   userNameText: {
     marginLeft: 20,
+    marginBottom: 20,
     fontSize: 20,
     fontWeight: "bold",
   },
+  rightContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  loginButton: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+  }
 });
 
 export default UserInfoDrawer;

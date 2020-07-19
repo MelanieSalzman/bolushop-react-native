@@ -82,7 +82,7 @@ const MyAccount = (props) => {
       setLoading(false);
     };
     setterProfile();
-  }, [username]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
