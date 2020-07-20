@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import LoginModal from "../../components/LoginModal";
 import ProductImageDetail from "../../components/ProductImageDetail";
-
-import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../constants/colors";
 import CostBg from "../../components/CostBg";
 import { FontAwesome } from "@expo/vector-icons";
+import {UserContext} from '../../context/UserProvider';
 
 const ProductDetails = ({ route, navigation }) => {
+  let {signed} = useContext(UserContext)
+  console.log(signed)
   const [product, setProduct] = useState(route.params?.Item);
   const [showModal, setShowModal] = useState(false);
 

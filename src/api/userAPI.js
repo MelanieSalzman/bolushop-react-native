@@ -5,7 +5,7 @@ import Config from 'react-native-config';
 urlNoxEmulator = '172.17.100.2:3000'
 urlNgrox = 'urlngrox'*/
 
-const urlSelected = '3393ec695175.ngrok.io';
+const urlSelected = 'dd4dd73597ee.ngrok.io';
 
 
 export const registerUser = async (name, username, email, password) => {
