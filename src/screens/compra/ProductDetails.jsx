@@ -29,17 +29,11 @@ const ProductDetails = ({ route, navigation }) => {
 
   const [token, setToken] = useState("");
 
-  const isLogged = async () => {
-    const tokenreceived = await AsyncStorage.getItem("token");
-    setToken(tokenreceived);
-    if (token != "") {
+  const goToUrl = () => {
       Linking.openURL(web);
-      console.log("paso por aca link");
-    } else {
-      console.log("paso por aca setModal");
-      setShowModal(true);
     }
-  };
+  
+
   const onLoginPress = () => {
     setShowModal(false);
   };
@@ -77,7 +71,7 @@ const ProductDetails = ({ route, navigation }) => {
         <View style={styles.buyButtonPositionConainer}>
           <TouchableOpacity
             style={styles.buyButtonContainer}
-            onPress={() => isLogged()}
+            onPress={() => goToUrl()}
           >
             <Text style={styles.buyButtonText}>Comprar</Text>
           </TouchableOpacity>

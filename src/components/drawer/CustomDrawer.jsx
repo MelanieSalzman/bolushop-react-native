@@ -15,6 +15,7 @@ import { profileUser } from "../../api/userAPI";
 const CustomDrawer = (props) => {
   
   const [userName, setUserName] = useState("");
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     const getUserCall = async () => {
@@ -26,12 +27,17 @@ const CustomDrawer = (props) => {
       console.log("No data");
     };
     getUserCall();
-  }, [userName]);
+  }, [userName, showModal]);
+
+  const setLoginModal = () => {
+    setShowModal(true)
+    props.drawerItems.navigation.navigate("HomeScreen", { modal: true });
+  }
 
   return (
     <View style={styles.container}>
       <SafeAreaView forceInset={{ flex: 1 }}>
-        <UserInfoDrawer userName={userName} />
+        <UserInfoDrawer userName={userName} setLoginModal={setLoginModal}/>
         <DrawerItemList {...props.drawerItems} />
       </SafeAreaView>
     </View>

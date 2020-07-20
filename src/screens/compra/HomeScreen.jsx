@@ -4,30 +4,50 @@ import Title from "../../components/TextH1";
 import ProductItem from "../../components/ProductItem";
 import RectangleButton from "../../components/LongRectangleButton";
 import LoadingOverlay from "../../components/LoadingOverlay";
+import LoginModal from "../../components/LoginModal";
 import Banner from "../../components/Banner";
 import colors from "../../constants/colors";
 import { getProducts } from "../../api/productAPI";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const HomeScreen = (props) => {
+const HomeScreen = ({ route, navigation }) => {
   const bannerDescription =
     "Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!";
 
   const [product1, setProduct1] = useState("");
   const [product2, setProduct2] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  
 
   useEffect(() => {
     const setterProducts = async () => {
       setLoading(true);
       const data = await getProducts();
-     setProduct1(data[7]);
+      setProduct1(data[7]);
       setProduct2(data[6]);
-
       setLoading(false);
+      if(route.params?.modal){
+        setShowModal(true)
+      }
     };
     setterProducts();
-  }, []);
+  }, [route.params?.modal]);
+
+  const onLoginPress = () => {
+    setShowModal(false);
+    navigation.setParams({modal:null})
+  };
+
+  const onRegisterPress = () => {
+    setShowModal(false);
+    navigation.setParams({modal:null})
+  };
+
+  const onForgotPassword = () => {
+    setShowModal(false);
+    navigation.navigate("ForgotPassword");
+  };
 
   return (
     <View style={styles.container}>
@@ -38,21 +58,27 @@ const HomeScreen = (props) => {
         text="Candidatos a BoluPremio del año"
       />
 
-      <ProductItem item={product1} navigation={props.navigation} />
+      <ProductItem item={product1} navigation={navigation} />
 
-      <ProductItem item={product2} navigation={props.navigation} />
+      <ProductItem item={product2} navigation={navigation} />
 
       <RectangleButton
         text="Ver todos los boluproductos"
         screen="ProductList"
-        navigation={props.navigation}
+        navigation={navigation}
       />
 
       <Banner
         title="Para vos comerciante"
         description={bannerDescription}
-        navigation={props.navigation}
+        navigation={navigation}
         screen="MyProducts"
+      />
+      <LoginModal
+        isVisible={showModal}
+        onLoginPress={onLoginPress}
+        onRegisterPress={onRegisterPress}
+        onForgotPassword={onForgotPassword}
       />
     </View>
   );

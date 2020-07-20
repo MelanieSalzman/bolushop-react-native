@@ -6,7 +6,7 @@ import Config from 'react-native-config';
 urlNoxEmulator = '172.17.100.2:3000'
 urlNgrox = 'urlngrox'*/
 
-const urlSelected = '0c3db2da39ac.ngrok.io';
+const urlSelected = '3393ec695175.ngrok.io';
 
 export const addProduct = async (name, price, description, details, web) => {
 

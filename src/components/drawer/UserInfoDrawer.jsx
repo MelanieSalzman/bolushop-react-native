@@ -11,13 +11,14 @@ const UserInfoDrawer = (props) => (
       />
       <View style={styles.rightContainer}>
         <Text style={styles.userNameText}>
-          {props.userName ? `¡Hola ${props.userName}!` : "No loggeado :("}
+          {props.userName ? `¡Hola ${props.userName}!` : "¡Hola!"}
         </Text>
         <View style={styles.loginButton}>
-          <BuyButton text='Ingresar' />
+          <BuyButton text='Ingresar' onPress={props.setLoginModal}/>
         </View>
       </View>
     </View>
+    
   </View>
 );
 
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
   userNameText: {
     marginLeft: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
   },
