@@ -16,8 +16,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import {UserContext} from '../../context/UserProvider';
 
 const ProductDetails = ({ route, navigation }) => {
-  let {signed} = useContext(UserContext)
-  console.log(signed)
+  let user = useContext(UserContext)
+  console.log(user.signed)
   const [product, setProduct] = useState(route.params?.Item);
   const [showModal, setShowModal] = useState(false);
 

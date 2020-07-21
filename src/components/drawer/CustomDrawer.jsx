@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Image,
@@ -10,24 +10,26 @@ import {
 import colors from "../../constants/colors";
 import { DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import UserInfoDrawer from "./UserInfoDrawer";
-import { profileUser } from "../../api/userAPI";
+import { getUsername } from "../../api/userAPI";
+import { UserContext } from '../../context/UserProvider'
 
 const CustomDrawer = (props) => {
   
-  const [userName, setUserName] = useState("");
+  let user = useContext(UserContext)
+
+  const [username, setUsername] = useState('');
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     const getUserCall = async () => {
-      const data = await profileUser();
-      if (data !== undefined) {
-        console.log(data.name);
-        setUserName(data.name);
+      const name = await getUsername();
+      if (name !== undefined) {
+        setUsername(name);
+        user.setUsername(name);
       }
-      console.log("No data");
     };
     getUserCall();
-  }, [userName, showModal]);
+  }, [user.signed, showModal]);
 
   const setLoginModal = () => {
     setShowModal(true)
@@ -37,7 +39,7 @@ const CustomDrawer = (props) => {
   return (
     <View style={styles.container}>
       <SafeAreaView forceInset={{ flex: 1 }}>
-        <UserInfoDrawer userName={userName} setLoginModal={setLoginModal}/>
+        <UserInfoDrawer userName={user.username} setLoginModal={setLoginModal}/>
         <DrawerItemList {...props.drawerItems} />
       </SafeAreaView>
     </View>

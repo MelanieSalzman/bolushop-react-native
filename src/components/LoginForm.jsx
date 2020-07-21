@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     View,
     Text,
@@ -11,18 +11,27 @@ import {
 } from 'react-native';
 import colors from '../constants/colors';
 import {loginUser} from '../api/userAPI'
+import { UserContext } from '../context/UserProvider' 
 
 
 const LoginForm = (props) => {
 
+    let user = useContext(UserContext)
+    
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
 
-    const onLoginPress = () => {
+    const onLoginPress = async () => {
         props.onLoginPress();
 
-        const login = loginUser(email,password)
-        console.log("login",login)
+        const token = await loginUser(email,password)
+        if(token!=undefined){
+        user.setSigned(true)
+        user.setToken(token)
+        }
+        console.log('este es el user',user)
     };
 
     const onForgotPassword = () => {
