@@ -1,26 +1,34 @@
-import React from "react";
+import React, {useContext, useEffect } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import colors from "../../constants/colors";
 import BuyButton from '../../components/BuyButton'
-const UserInfoDrawer = (props) => (
-  <View style={styles.container}>
-    <View style={styles.userInfoContainer}>
-      <Image
-        source={require("../../images/avatar.png")}
-        style={styles.userImage}
-      />
-      <View style={styles.rightContainer}>
-        <Text style={styles.userNameText}>
-          {props.userName ? `¡Hola ${props.userName}!` : "¡Hola!"}
-        </Text>
-        <View style={styles.loginButton}>
-          <BuyButton text='Ingresar' onPress={props.setLoginModal}/>
+import { UserContext } from '../../context/UserProvider'
+const UserInfoDrawer = (props) => {
+
+  let user = useContext(UserContext)
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.userInfoContainer}>
+        <Image
+          source={require("../../images/avatar.png")}
+          style={styles.userImage}
+        />
+        <View style={styles.rightContainer}>
+          <Text style={styles.userNameText}>
+            {user.signed==true ? `¡Hola ${user.username}!` : "¡Hola!"}
+          </Text>
+          { user.signed!=true ?
+          <View style={styles.loginButton}>
+            <BuyButton text='Ingresar' onPress={props.setLoginModal} />
+          </View> : null
+          }
         </View>
       </View>
+
     </View>
-    
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

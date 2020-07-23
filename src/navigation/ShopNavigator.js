@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   createDrawerNavigator,
@@ -21,6 +21,8 @@ import UpdateProductScreen from "../screens/venta/UpdateProductScreen";
 import UserInfoDrawer from "../components/drawer/UserInfoDrawer";
 import { nameMenu } from "../api/userAPI";
 import CustomDrawer from "../components/drawer/CustomDrawer";
+import { UserContext } from '../context/UserProvider';
+import { TextInput } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 const HomeStackNavigator = createStackNavigator();
@@ -102,6 +104,9 @@ export const ProductListNavigator = () => (
 
 const HomeDrawerNavigator = createDrawerNavigator();
 export const HomeDrawer = () => {
+
+  let user = useContext(UserContext)
+
   return (
     <HomeDrawerNavigator.Navigator
       drawerContent={(props) => <CustomDrawer drawerItems={props} />}
@@ -125,26 +130,29 @@ export const HomeDrawer = () => {
           ),
         }}
       />
+      {user.signed==true ?
+        <HomeDrawerNavigator.Screen
+          name="Mi cuenta"
+          component={MyAccountNavigator}
+          options={{
+            drawerIcon: (props) => (
+              <MaterialIcons name="face" size={23} color={props.color} />
+            ),
+          }}
+        /> : null}
+      {user.signed==true ?
+        <HomeDrawerNavigator.Screen
+          name="Vender"
+          component={SellerNavigator}
+          options={{
+            drawerIcon: (props) => (
+              <MaterialIcons name="store" size={23} color={props.color} />
+            ),
+          }}
+        /> : null}
 
-      <HomeDrawerNavigator.Screen
-        name="Mi cuenta"
-        component={MyAccountNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <MaterialIcons name="face" size={23} color={props.color} />
-          ),
-        }}
-      />
-
-      <HomeDrawerNavigator.Screen
-        name="Vender"
-        component={SellerNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <MaterialIcons name="store" size={23} color={props.color} />
-          ),
-        }}
-      />
     </HomeDrawerNavigator.Navigator>
   );
 };
+
+

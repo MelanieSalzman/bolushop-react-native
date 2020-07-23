@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -21,8 +21,12 @@ import LogoutButton from "../../components/LogoutButton.jsx";
 import { updateUser } from "../../api/userAPI";
 import colors from "../../constants/colors.js";
 import { MaterialIcons } from "@expo/vector-icons";
+import { UserContext } from '../../context/UserProvider' 
 
 const MyAccount = (props) => {
+
+  let user = useContext(UserContext)
+
   const [enableWritingUsername, setEnableWritingUsername] = useState(false);
   const [enableWritingEmail, setEnableWritingEmail] = useState(false);
   const [enableWritingName, setEnableWritingName] = useState(false);
@@ -36,7 +40,7 @@ const MyAccount = (props) => {
   const [name, setName] = useState("");
 
   const [isLoading, setLoading] = useState(false);
-  const [islogout, setIsLogout] = useState(false)
+  const [islogout, setIsLogout] = useState(false);
 
   const onChangeTextEmail = (text) => {
     setEmail(text);
@@ -52,8 +56,11 @@ const MyAccount = (props) => {
   const logout = async () => {
     await AsyncStorage.removeItem("token");
     setIsLogout(true)
+    user.logout()
+    user.setToken('')
+    user.setUsername('')
     props.navigation.navigate("HomeScreen");
-    console.log("paso por aca");
+    console.log("paso por aca",user);
   };
 
   const saveProfile = () => {

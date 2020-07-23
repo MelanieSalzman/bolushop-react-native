@@ -17,8 +17,9 @@ const CustomDrawer = (props) => {
   
   let user = useContext(UserContext)
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(user.username);
   const [showModal, setShowModal] = useState(false)
+  const [signed, setSigned] = useState(user.signed)
 
   useEffect(() => {
     const getUserCall = async () => {
@@ -29,7 +30,7 @@ const CustomDrawer = (props) => {
       }
     };
     getUserCall();
-  }, [user.signed, showModal]);
+  }, [signed, showModal]);
 
   const setLoginModal = () => {
     setShowModal(true)

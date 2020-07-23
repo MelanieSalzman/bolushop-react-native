@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Title from "../../components/TextH1";
 import ProductItem from "../../components/ProductItem";
@@ -9,8 +9,12 @@ import Banner from "../../components/Banner";
 import colors from "../../constants/colors";
 import { getProducts } from "../../api/productAPI";
 import { MaterialIcons } from "@expo/vector-icons";
+import { UserContext } from '../../context/UserProvider'
 
 const HomeScreen = ({ route, navigation }) => {
+
+  let user = useContext(UserContext)
+
   const bannerDescription =
     "Publicita tu producto en Bolushop y obtene mayor cantidad de ventas \n \n ¡Que crezca tu negocio ya!";
 
@@ -18,7 +22,6 @@ const HomeScreen = ({ route, navigation }) => {
   const [product2, setProduct2] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  
 
   useEffect(() => {
     const setterProducts = async () => {
@@ -32,7 +35,7 @@ const HomeScreen = ({ route, navigation }) => {
       }
     };
     setterProducts();
-  }, [route.params?.modal]);
+  }, [route.params?.modal, user.signed]);
 
   const onLoginPress = () => {
     setShowModal(false);
