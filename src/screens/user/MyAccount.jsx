@@ -57,8 +57,8 @@ const MyAccount = (props) => {
     await AsyncStorage.removeItem("token");
     setIsLogout(true)
     user.logout()
-    user.setToken('')
-    user.setUsername('')
+    user.removeToken()
+    user.removeUsername()
     props.navigation.navigate("HomeScreen");
     console.log("paso por aca",user);
   };

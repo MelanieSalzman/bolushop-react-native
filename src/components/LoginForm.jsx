@@ -29,7 +29,7 @@ const LoginForm = (props) => {
         const token = await loginUser(email,password)
         if(token!=undefined){
         user.login()
-        user.setToken(token)
+        user.getToken(token)
         }
         console.log('este es el user',user)
     };

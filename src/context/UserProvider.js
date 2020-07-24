@@ -16,10 +16,25 @@ export const UserProvider = (props) => {
         setSigned(false)
     }
 
+    const getToken = (tokenNumber) => {
+        setToken(tokenNumber)
+    }
+
+    const removeToken = () => {
+        setToken(null)
+    }
+
+    const getUsername = (name) => {
+        setUsername(name)
+    }
+
+    const removeUsername = () => {
+        setUsername(null)
+    }
     
 
     return(
-        <UserContext.Provider value={{ signed, login, logout, token, setToken, username, setUsername}}>
+        <UserContext.Provider value={{ signed, login, logout, token, getToken, removeToken, username, getUsername, removeUsername}}>
         {props.children}
         </UserContext.Provider>
     );

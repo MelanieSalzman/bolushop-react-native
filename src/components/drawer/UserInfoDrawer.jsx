@@ -16,9 +16,9 @@ const UserInfoDrawer = (props) => {
         />
         <View style={styles.rightContainer}>
           <Text style={styles.userNameText}>
-            {user.signed==true ? `¡Hola ${user.username}!` : "¡Hola!"}
+            {user.signed ? `¡Hola ${user.username}!` : "¡Hola!"}
           </Text>
-          { user.signed!=true ?
+          { !user.signed ?
           <View style={styles.loginButton}>
             <BuyButton text='Ingresar' onPress={props.setLoginModal} />
           </View> : null
