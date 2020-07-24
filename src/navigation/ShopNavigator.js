@@ -13,6 +13,7 @@ import ProductDetails, {
 } from "../screens/compra/ProductDetails";
 import ProductList, { ProductListNavOptions } from "../screens/compra/ProductList";
 import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen";
+import EnterCode from '../screens/auth/EnterCode';
 import MyProducts, { MyProductsNavOptions } from "../screens/venta/MyProducts";
 import MyAccount, { MyAccountNavOptions } from "../screens/user/MyAccount";
 import ChangePassword from "../screens/user/ChangePassword";
@@ -23,6 +24,7 @@ import { nameMenu } from "../api/userAPI";
 import CustomDrawer from "../components/drawer/CustomDrawer";
 import { UserContext } from '../context/UserProvider';
 import { TextInput } from "react-native-gesture-handler";
+import ResetPassword from "../screens/auth/ResetPassword";
 
 const { width } = Dimensions.get("window");
 const HomeStackNavigator = createStackNavigator();
@@ -50,6 +52,16 @@ export const HomeNavigator = () => (
     <HomeStackNavigator.Screen
       name="ForgotPassword"
       component={ForgotPasswordScreen}
+    />
+
+    <HomeStackNavigator.Screen
+      name="EnterCode"
+      component={EnterCode}
+    />
+
+    <HomeStackNavigator.Screen
+      name="ResetPassword"
+      component={ResetPassword}
     />
 
     <HomeStackNavigator.Screen
@@ -130,7 +142,7 @@ export const HomeDrawer = () => {
           ),
         }}
       />
-      {user.signed==true ?
+      {user.signed == true ?
         <HomeDrawerNavigator.Screen
           name="Mi cuenta"
           component={MyAccountNavigator}
@@ -140,7 +152,7 @@ export const HomeDrawer = () => {
             ),
           }}
         /> : null}
-      {user.signed==true ?
+      {user.signed == true ?
         <HomeDrawerNavigator.Screen
           name="Vender"
           component={SellerNavigator}

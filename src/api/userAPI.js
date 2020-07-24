@@ -175,3 +175,94 @@ export const nameMenu = async () => {
 
   return data.username;
 };
+
+export const sendCode = async (email) => {
+
+  try {
+    let sended = false;
+
+    const response = await fetch(`http://${urlSelected}/api/email/forgotpassword`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "email": email
+      })
+    })
+
+    const data = await response.json()
+
+    if(data!=undefined)
+    {
+      sended= true
+    }
+
+    return sended;
+  }
+  catch (e) {
+    console.log("Error: ", e)
+  }
+}
+
+
+export const enterCode = async (email, code) => {
+
+  try {
+    let entered = false;
+
+    const response = await fetch(`http://${urlSelected}/api/email/recoverpassword`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "email": email,
+        "code": code
+      })
+    })
+
+    const data = await response.json()
+
+    if(data!=undefined)
+    {
+      entered= true
+    }
+
+    return entered;
+  }
+  catch (e) {
+    console.log("Error: ", e)
+  }
+}
+
+export const resetPassword = async (email, password) => {
+
+  try {
+    let reseted = false;
+
+    const response = await fetch(`http://${urlSelected}/api/email/resetpassword`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "email": email,
+        "password": password
+      })
+    })
+
+    const data = await response.json()
+
+    if(data!=undefined)
+    {
+      reseted= true
+    }
+
+    return reseted;
+  }
+  catch (e) {
+    console.log("Error: ", e)
+  }
+}
+

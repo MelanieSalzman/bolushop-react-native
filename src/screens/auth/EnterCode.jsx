@@ -5,18 +5,19 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../constants/colors';
 import LoadingOverlay from '../../components/LoadingOverlay';
-import {sendCode} from '../../api/userAPI'
+import {enterCode} from '../../api/userAPI'
 
-const ForgotPasswordScreen = (props) => {
-  const [email, setEmail] = useState('');
+const EnterCode = ({route,navigation}) => {
+  const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const { email } = route.params
 
-  const onSendEmailPress = () => {
+  const onSendCodePress = () => {
     setLoading(true);
-    let sended = sendCode(email)
-    console.log(sended)
+    let entered = enterCode(email,code)
+    console.log(entered)
     setLoading(false)
-    props.navigation.navigate("EnterCode",{ email: email })
+    navigation.navigate("ResetPassword",{ email: email })
   };
 
   return (
@@ -24,32 +25,17 @@ const ForgotPasswordScreen = (props) => {
       <LoadingOverlay visible={loading} />
       <View style={styles.dialogsAndInputContainer}>
 
-        <View style={[styles.forgotPassworDialogContainer, styles.forgotPasswordFirstTextContainer]}>
-          <Text style={styles.forgotPasswordMessageTextLeft}>¿Olvidaste tu contraseña?</Text>
-          <Image style={styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaTriste.png')} />
-        </View>
-
-        <View style={styles.dialogRightContainer}>
-          <View style={styles.emptyView} />
-          <View style={[styles.forgotPassworDialogContainer, styles.forgotPasswordSecondTextContainer]}>
-            <Image style={styles.forgotPasswordFirstImage} source={require('../../../assets/images/caritaFeliz.png')} />
-            <Text style={[styles.forgotPasswordMessageTextLeft, styles.forgotPasswordMessageTextRigth]}>
-              No te preocupes!
-            </Text>
-          </View>
-        </View>
-
         <View style={styles.inputWithTitleContainer}>
-          <Text>Indicanos a que email debemos enviarla</Text>
+          <Text>Ingresa el codigo para recuperar tu contraseña</Text>
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.textInput}
-              onChangeText={(text) => setEmail(text)}
-              value={email}
+              onChangeText={(text) => setCode(text)}
+              value={code}
             />
           </View>
           <View style={styles.sendButtonContainer}>
-            <TouchableOpacity style={styles.sendButton} onPress={onSendEmailPress}>
+            <TouchableOpacity style={styles.sendButton} onPress={onSendCodePress}>
               <Text style={styles.sendButtonText}>Enviar</Text>
             </TouchableOpacity>
           </View>
@@ -144,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPasswordScreen;
+export default EnterCode;
