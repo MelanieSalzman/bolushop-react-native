@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   FlatList,
@@ -15,23 +15,50 @@ import TextH1 from "../../components/TextH1";
 import colors from "../../constants/colors";
 import { getProductsSeller, deleteProduct } from "../../api/productAPI";
 import { MaterialIcons } from "@expo/vector-icons";
+import { UserContext } from '../../context/UserProvider'
+import LoginModal from '../../components/LoginModal'
 
 const MyProducts = (props) => {
+
+  let user = useContext(UserContext)
+
   const [products, setProducts] = useState("");
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [isLoading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const onLoginPress = () => {
+    setShowModal(false);
+    props.navigation.setParams({ modal: null })
+    
+  };
+
+  const onRegisterPress = () => {
+    setShowModal(false);
+    props.navigation.setParams({ modal: null })
+  };
+
+  const onForgotPassword = () => {
+    setShowModal(false);
+    props.navigation.navigate("ForgotPassword");
+  };
 
   useEffect(() => {
-   //setLoading(true);
-    const setterMyProducts = async () => {
-      const data = await getProductsSeller();
-      setProducts(data);
-      console.log("paso por aca")
-     // setLoading(false);
-    };
-    setterMyProducts();
-  }, [products]);
+    //setLoading(true);
+    if (!user.signed) {
+      setShowModal(true)
+    }
+    if (user.signed) {
+      const setterMyProducts = async () => {
+        const data = await getProductsSeller();
+        setProducts(data);
+        console.log("paso por aca")
+        // setLoading(false);
+      };
+      setterMyProducts();
+    }
+  }, [products, user.signed]);
 
   const deleteItem = () => {
     const deleted = deleteProduct(itemToDelete);
@@ -47,7 +74,7 @@ const MyProducts = (props) => {
   const onItemEditPress = (item) => {
     props.navigation.navigate("UpdateProduct", { editItem: item });
   };
-  
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -92,6 +119,12 @@ const MyProducts = (props) => {
           </View>
         </View>
       </Modal>
+      <LoginModal
+        isVisible={showModal}
+        onLoginPress={onLoginPress}
+        onRegisterPress={onRegisterPress}
+        onForgotPassword={onForgotPassword}
+      />
     </SafeAreaView>
   );
 };

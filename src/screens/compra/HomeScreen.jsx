@@ -24,32 +24,41 @@ const HomeScreen = ({ route, navigation }) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+
     const setterProducts = async () => {
       setLoading(true);
       const data = await getProducts();
       setProduct1(data[7]);
       setProduct2(data[6]);
       setLoading(false);
-      if(route.params?.modal){
-        setShowModal(true)
+      if (route.params?.modal) {
+        const { modal } = route.params
+        if (modal) {
+          setShowModal(true)
+          navigation.setParams({ modal: false })
+        } else {
+          setShowModal(false)
+        }
       }
     };
     setterProducts();
-  }, [route.params?.modal, user.signed]);
+  }, [route.params]);
 
   const onLoginPress = () => {
     setShowModal(false);
-    navigation.setParams({modal:null})
+    navigation.setParams({ modal: false })
   };
 
   const onRegisterPress = () => {
     setShowModal(false);
-    navigation.setParams({modal:null})
+    navigation.setParams({ modal: false })
   };
 
   const onForgotPassword = () => {
     setShowModal(false);
+    navigation.setParams({ modal: false })
     navigation.navigate("ForgotPassword");
+
   };
 
   return (

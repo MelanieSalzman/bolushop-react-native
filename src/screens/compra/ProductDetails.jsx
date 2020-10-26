@@ -13,7 +13,7 @@ import ProductImageDetail from "../../components/ProductImageDetail";
 import colors from "../../constants/colors";
 import CostBg from "../../components/CostBg";
 import { FontAwesome } from "@expo/vector-icons";
-import {UserContext} from '../../context/UserProvider';
+import { UserContext } from '../../context/UserProvider';
 
 const ProductDetails = ({ route, navigation }) => {
   let user = useContext(UserContext)
@@ -31,9 +31,9 @@ const ProductDetails = ({ route, navigation }) => {
   const [token, setToken] = useState("");
 
   const goToUrl = () => {
-      Linking.openURL(web);
-    }
-  
+    Linking.openURL(web);
+  }
+
 
   const onLoginPress = () => {
     setShowModal(false);
@@ -124,21 +124,21 @@ const ProductDetails = ({ route, navigation }) => {
     </View>
   );
 };
-
-export const ProductDetailsNavOptions = (props) => ({
-  headerTitle: "Detalle Producto",
-  headerStyle: {
-    backgroundColor: colors.passwordInputBorder,
-  },
-  headerRight: () => (
-    <View style={styles.headerImageContainer}>
-      <Image
-        style={styles.headerImage}
-        source={require("../../../assets/images/caritaFelizHeader.png")}
-      />
-    </View>
-  ),
-});
+        
+  export const ProductDetailsNavOptions = (props) => ({
+    headerTitle: "Detalle Producto",
+    headerStyle: {
+      backgroundColor: colors.passwordInputBorder,
+    },
+    headerRight: () => (
+      <View style={styles.headerImageContainer}>
+        <Image
+          style={styles.headerImage}
+          source={require("../../../assets/images/caritaFelizHeader.png")}
+        />
+      </View>
+    ),
+  });
 
 const styles = StyleSheet.create({
   container: {
@@ -146,12 +146,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.defaultBackground,
   },
   imageContainer: {
-    marginHorizontal: 20,
+    marginHorizontal: 50,
     height: 200,
   },
   priceContainer: {
     bottom: 20,
-    right: 60,
+    right: 0,
   },
   productNameContainer: {
     marginTop: 12,
@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 90,
-    marginLeft: 15,
     backgroundColor: colors.passwordInputBorder,
+    marginTop: 20
   },
   bolupremioTexts: {
     fontSize: 16,
@@ -212,11 +212,11 @@ const styles = StyleSheet.create({
   },
   bolupremioActionLeftContainer: {
     flexDirection: "row",
-    marginRight: 20,
   },
   bolupremioActionRightContainer: {
     flexDirection: "row",
-    marginLeft: 20,
+    marginLeft: 10,
+    marginRight: 10,
   },
   bolupermioActionText: {
     fontWeight: "bold",

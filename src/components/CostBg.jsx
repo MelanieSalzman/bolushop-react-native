@@ -4,7 +4,7 @@ import TextH1 from "./TextH1";
 import ProductImage from "./ProductImage";
 
 const CostBg = (props) => {
-  const stringCost = `ARS $${props.text}`;
+  const stringCost = `ARS ${props.text}`;
 
   return (
     <View

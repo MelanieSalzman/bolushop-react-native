@@ -21,7 +21,7 @@ import LogoutButton from "../../components/LogoutButton.jsx";
 import { updateUser } from "../../api/userAPI";
 import colors from "../../constants/colors.js";
 import { MaterialIcons } from "@expo/vector-icons";
-import { UserContext } from '../../context/UserProvider' 
+import { UserContext } from '../../context/UserProvider'
 
 const MyAccount = (props) => {
 
@@ -59,8 +59,8 @@ const MyAccount = (props) => {
     user.logout()
     user.removeToken()
     user.removeUsername()
-    props.navigation.navigate("HomeScreen");
-    console.log("paso por aca",user);
+    props.navigation.navigate("HomeScreen", { modal: false });
+    console.log("paso por aca", user);
   };
 
   const saveProfile = () => {

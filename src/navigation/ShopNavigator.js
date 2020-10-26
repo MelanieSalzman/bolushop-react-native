@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/drawer";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { View, SafeAreaView, Dimensions } from "react-native";
+import { View, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import HomeScreen, { HomeNavOptions } from "../screens/compra/HomeScreen";
 import ProductDetails, {
   ProductDetailsNavOptions,
@@ -152,7 +152,7 @@ export const HomeDrawer = () => {
             ),
           }}
         /> : null}
-      {user.signed == true ?
+      
         <HomeDrawerNavigator.Screen
           name="Vender"
           component={SellerNavigator}
@@ -161,10 +161,22 @@ export const HomeDrawer = () => {
               <MaterialIcons name="store" size={23} color={props.color} />
             ),
           }}
-        /> : null}
+        />
 
     </HomeDrawerNavigator.Navigator>
+    
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 0.9
+  },
+  footer: {
+    flex: 0.1
+  },
+
+
+});
 
 

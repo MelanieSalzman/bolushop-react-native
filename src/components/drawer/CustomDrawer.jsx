@@ -14,10 +14,9 @@ import { getUsername } from "../../api/userAPI";
 import { UserContext } from '../../context/UserProvider'
 
 const CustomDrawer = (props) => {
-  
+
   let user = useContext(UserContext)
 
-  const [showModal, setShowModal] = useState(false)
   const [signed, setSigned] = useState(user.signed)
 
   useEffect(() => {
@@ -28,17 +27,17 @@ const CustomDrawer = (props) => {
       }
     };
     getUserCall();
-  }, [user.signed, showModal]);
+  }, [user.signed]);
 
   const setLoginModal = () => {
-    setShowModal(true)
+
     props.drawerItems.navigation.navigate("HomeScreen", { modal: true });
   }
 
   return (
     <View style={styles.container}>
       <SafeAreaView forceInset={{ flex: 1 }}>
-        <UserInfoDrawer userName={user.username} setLoginModal={setLoginModal}/>
+        <UserInfoDrawer userName={user.username} setLoginModal={setLoginModal} />
         <DrawerItemList {...props.drawerItems} />
       </SafeAreaView>
     </View>
